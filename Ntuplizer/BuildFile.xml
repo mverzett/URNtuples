@@ -1,0 +1,11 @@
+<use name="FWCore/Framework"/>
+<use name="FWCore/ParameterSet"/>
+<use name="DataFormats/Common"/>
+<use name="URNtuples/Utilities"/>
+<use name="DataFormats/PatCandidates"/>
+<use name="root"/>
+<use name="PhysicsTools/UtilAlgos"/>
+<use name="FWCore/ServiceRegistry"/> 
+<export>
+  <lib   name="URNtuplesNtuplizerPlugins"/>
+</export>
