@@ -134,6 +134,14 @@ PATEmbedder<PATObject>::produce(edm::Event& iEvent, const edm::EventSetup& iSetu
 		iEvent.getByToken(token, shiftsHandles.back());
 	}
 
+	for(auto&& shift_handle : shiftsHandles) {
+		if(shift_handle->size() != handle->size()) {
+			throw cms::Exception("CorruptData")
+				<< "The handle you provided has size " << shift_handle->size()
+				<< " when the main collection has size " << handle->size() << " and this is VERY bad!\n";
+		}
+	}
+
   //get all trigger matches handles
   std::vector< edm::Handle< edm::Association<pat::TriggerObjectStandAloneCollection> > > match_maps;
   for(auto&& match : trig_matchTokens_){
@@ -174,13 +182,27 @@ PATEmbedder<PATObject>::produce(edm::Event& iEvent, const edm::EventSetup& iSetu
     }
 
 		//Add user candidates (full p4 linked)
-		for(size_t cand_idx=0; cand_idx < shiftsHandles.size(); cand_idx++) {
+		for(size_t cand_idx=0; cand_idx < shiftsHandles.size(); cand_idx++) {			
+			reco::CandidatePtr ptr(shiftsHandles[cand_idx], idx);
+			if(fabs(fabs(ptr->eta())-fabs(new_cand.eta())) > 0.01) {
+				std::cout << shiftsHandles[cand_idx]->size() << " " << handle->size() << std::endl;
+				for(size_t j = 0; j < handle->size(); j++){
+					std::cout << "(" << handle->at(j).pt()<< ", " << handle->at(j).eta() << ", " << handle->at(j).phi() << ", " << handle->at(j).mass() << ")";
+					std::cout << "       ";
+					std::cout << "(" << shiftsHandles[cand_idx]->at(j).pt()<< ", " << shiftsHandles[cand_idx]->at(j).eta() 
+										<< ", " << shiftsHandles[cand_idx]->at(j).phi() << ", " << shiftsHandles[cand_idx]->at(j).mass() << ")";
+					std::cout << std::endl;
+				}
+				throw cms::Exception("CorruptData")
+					<< "The eta of the shifted candidate (" << ptr->pt()<< ", " << ptr->eta() << ", " << ptr->phi() << ", " << ptr->mass()
+					<< ") from: "<< shiftNames_[cand_idx] << " does not match the original one (" << new_cand.pt()<< ", " << new_cand.eta() << ", " << new_cand.phi() << ", " << new_cand.mass() << ") and that's a paddlin'!\n";				
+			}
 			new_cand.addUserCand(
 				shiftNames_[cand_idx], 
-				reco::CandidatePtr(shiftsHandles[cand_idx], idx)
+				ptr
 				);
 		}
-		
+
     //put new candidate
     output->push_back(new_cand);
   }
