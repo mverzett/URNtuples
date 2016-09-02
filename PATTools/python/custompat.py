@@ -1,15 +1,30 @@
 import FWCore.ParameterSet.Config as cms
-import URAnalysis.Utilities.cfgtools as cfgtools
+import URNtuples.Utilities.cfgtools as cfgtools
 from pdb import set_trace
 from CondCore.DBCommon.CondDBSetup_cfi import *
 from PhysicsTools.PatAlgos.tools.helpers import massSearchReplaceAnyInputTag
-from URAnalysis.Utilities.version import cmssw_branch 
-from URAnalysis.PATTools.objects.jetmet import rerun_JECJER
+from URNtuples.Utilities.version import cmssw_version 
+from URNtuples.PATTools.objects.jetmet import rerun_JECJER
 
 def preprocess(process, opts, **collections):
 	'''Runs preliminary pat customization (JEC, MET corrections, etc...)
 	returns the dict of final products, and the preprocessing sequence'''
 	process.preprocessing = cms.Sequence()
+
+	#CMSSW_8_0_19 2016 PromptReco specific
+	if cmssw_version() != 'CMSSW_8_0_19':
+		raise RuntimeError('This part of code was meant to run in CMSSW_8_0_19, make sure still makes sense!')
+	process.load('RecoMET.METFilters.BadPFMuonFilter_cfi')
+	process.BadPFMuonFilter.muons = cms.InputTag("slimmedMuons")
+	process.BadPFMuonFilter.PFCandidates = cms.InputTag("packedPFCandidates")
+	process.preprocessing *= process.BadPFMuonFilter
+
+	process.load('RecoMET.METFilters.BadChargedCandidateFilter_cfi')
+	process.BadChargedCandidateFilter.muons = cms.InputTag("slimmedMuons")
+	process.BadChargedCandidateFilter.PFCandidates = cms.InputTag("packedPFCandidates")
+	process.preprocessing *= process.BadChargedCandidateFilter
+
+	#Common code
 	##Custom database for JEC
 	if opts.JECDb:
 		sqfile, tag1, tag2 = tuple(opts.JECDb.split(':'))
@@ -66,10 +81,10 @@ def customize(process, opts, **collections):
     #trigger is a mess, does not respect conding conventions
     #when changing something have a look at the module
     #itself
-    process.load('URAnalysis.PATTools.objects.trigger')
+    process.load('URNtuples.PATTools.objects.trigger')
     collections['trigger'] = 'triggerEvent'
     
-    process.load('URAnalysis.PATTools.objects.vertices')
+    process.load('URNtuples.PATTools.objects.vertices')
     if opts.reHLT:
         process.unpackedPatTrigger.triggerResults = cms.InputTag("TriggerResults","","HLT2")
     collections['vertices'] = cfgtools.chain_sequence(
@@ -77,21 +92,21 @@ def customize(process, opts, **collections):
         collections['vertices']
         )
 
-    process.load('URAnalysis.PATTools.objects.muons')
+    process.load('URNtuples.PATTools.objects.muons')
     collections['muons'] = cfgtools.chain_sequence(
         process.customMuons,
         collections['muons']
         )
     process.muonIpInfo.vtxSrc = collections['vertices']
 
-    process.load('URAnalysis.PATTools.objects.electrons')
+    process.load('URNtuples.PATTools.objects.electrons')
     collections['electrons'] = cfgtools.chain_sequence(
         process.customElectrons,
         collections['electrons']
         )
     process.electronIpInfo.vtxSrc = collections['vertices']
     
-    import URAnalysis.PATTools.objects.jets as jets
+    import URNtuples.PATTools.objects.jets as jets
     jet_sequence, collections['jets'] = jets.add_jets(process, collections['jets'], opts)
 
     process.customPAT = cms.Sequence(

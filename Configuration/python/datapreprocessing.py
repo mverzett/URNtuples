@@ -58,7 +58,7 @@ def preprocess(process):
    isdata = True
    #jetuncfile = 'CondFormats/JetMETObjects/data/Summer15_50nsV5_DATA_UncertaintySources_AK4PFchs.txt'
    #jetuncfile = 'CondFormats/JetMETObjects/data/Summer15_25nsV5_DATA_UncertaintySources_AK4PFchs.txt'
-   jetuncfile = 'URAnalysis/PATTools/data/Summer15_25nsV6_DATA_UncertaintySources_AK4PFchs.txt'
+   jetuncfile = 'URNtuples/PATTools/data/Summer15_25nsV6_DATA_UncertaintySources_AK4PFchs.txt'
 
    from PhysicsTools.PatUtils.tools.runMETCorrectionsAndUncertainties import runMetCorAndUncFromMiniAOD
    runMetCorAndUncFromMiniAOD(

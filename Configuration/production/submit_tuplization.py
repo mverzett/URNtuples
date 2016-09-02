@@ -7,15 +7,14 @@
 
 #monkey-patch the dictionary      
 
-import URAnalysis.Utilities.prettyjson as prettyjson
+import URNtuples.Utilities.prettyjson as prettyjson
 import sys
-from URAnalysis.Utilities.fnselect import fnselect
-from URAnalysis.Utilities.job import Job
-from URAnalysis.Utilities.struct import Struct
+from URNtuples.Utilities.job import Job
 from argparse import ArgumentParser
 from pdb import set_trace
 import os
 import subprocess
+from fnmatch import fnmatch
 from glob import glob
 
 parser = ArgumentParser(description=__doc__)
@@ -79,17 +78,15 @@ if not os.path.isfile(args.sample_def):
 if not os.path.isdir(args.jobid):
    os.makedirs(args.jobid)
 
-all_samples = [Struct(**i) for i in prettyjson.loads(open(args.sample_def).read())]
-to_submit = reduce(
-   lambda x,y: x+y, 
-   [fnselect(all_samples, pattern, key=lambda x: x.name) for pattern in args.samples],
-   []
+all_samples = prettyjson.loads(open(args.sample_def).read())
+to_submit = filter(
+   lambda x: any(fnmatch(x, pattern) for pattern in args.samples),
+	 all_samples
 )
 pyargs = parse_pyargs(args.options)
 
 #remove duplicate samples selected by multiple patterns
-
-to_submit = set(to_submit)
+#to_submit = set(to_submit)
 
 jobs = []
 
@@ -105,7 +102,7 @@ externals = [os.path.join(os.environ['CMSSW_BASE'],'src',i) for i in externals]
 
 for sample in to_submit:
    opts = {}
-   isData = sample.name.startswith('data')
+   isData = sample['name'].startswith('data')
    opts['isMC'] = 'True' if not isData else 'False'
    opts['computeWeighted'] = 'True' if not isData else 'False'
 
@@ -117,8 +114,8 @@ for sample in to_submit:
       Job(
          '../make_pat_and_ntuples.py',
          args.jobid,
-         sample.name,
-         sample.DBSName,
+         sample['name'],
+         sample['DBSName'],
          dump_pyargs(opts),
          args.njobs if args.njobs > 0 else None,
          externals,

@@ -27,7 +27,7 @@ def diaper(f):
     return wrapper
 
 _fwk_directory = os.path.join(
-    os.environ['CMSSW_BASE'], 'src', 'URAnalysis')
+    os.environ['CMSSW_BASE'], 'src', 'URNtuples')
 
 
 @diaper

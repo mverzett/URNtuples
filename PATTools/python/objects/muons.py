@@ -8,7 +8,7 @@ urSkimmedMuons = cms.EDFilter(
 customMuons = cms.Sequence(urSkimmedMuons)
 
 #trigger match
-from URAnalysis.PATTools.objects.trigger import trigger_paths, matchtemplate
+from URNtuples.PATTools.objects.trigger import trigger_paths, matchtemplate
 
 matchers = []
 mupaths = [i for i in trigger_paths if 'Mu' in i]

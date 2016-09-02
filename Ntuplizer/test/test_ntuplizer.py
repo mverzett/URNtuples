@@ -29,7 +29,7 @@ process.printTree = cms.EDAnalyzer("ParticleListDrawer",
   src = cms.InputTag("prunedGenParticles")
 )
 
-import URAnalysis.Ntuplizer.ntuplizer as ntuplizer
+import URNtuples.Ntuplizer.ntuplizer as ntuplizer
 ntuple_seq, ntuple_end = ntuplizer.make_ntuple(
    process,
    True

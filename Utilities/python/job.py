@@ -1,16 +1,17 @@
 import os
-from URAnalysis.Utilities.struct import Struct
 
 class Crab2Cfg(object):
 	'''
 	Like the cfg infrastructure for crab3, but for crab2
 	'''
 	def __init__(self, *sections):
+		raise RuntimeError('Crab 2 submission is not supported any longer! The code is still in place, but needs fixing')
 		for s in sections:
 			self.section(s)
 
 	def section(self, name):
-		setattr(self, name, Struct())
+		pass #FIXME: Here is where it needs fixing
+		#setattr(self, name, Struct())
 
 	def __repr__(self):
 		ret = []

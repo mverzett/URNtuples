@@ -131,8 +131,8 @@ def rerun_JECJER(process, opts, collections):
     algopt = cms.string('AK4PFchs_pt'),
     algo = cms.string('AK4PFchs'),
 		#or from txt file (DEPRECATED!)
-		#resolutionFile  = cms.FileInPath('URAnalysis/PATTools/data/Fall15_25nsV2_MC_PtResolution_AK4PFchs.txt'),
-		#scaleFactorFile = cms.FileInPath('URAnalysis/PATTools/data/Fall15_25nsV2_MC_SF_AK4PFchs.txt'),
+		#resolutionFile  = cms.FileInPath('URNtuples/PATTools/data/Fall15_25nsV2_MC_PtResolution_AK4PFchs.txt'),
+		#scaleFactorFile = cms.FileInPath('URNtuples/PATTools/data/Fall15_25nsV2_MC_SF_AK4PFchs.txt'),
 		
 		genJets = cms.InputTag('slimmedGenJets'),
 		dRMax = cms.double(0.2),

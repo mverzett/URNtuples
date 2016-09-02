@@ -1,5 +1,5 @@
 import FWCore.ParameterSet.Config as cms
-import URAnalysis.Utilities.version as version
+import URNtuples.Utilities.version as version
 import time
 
 def embed_meta(process, isMC, computeWeighted):

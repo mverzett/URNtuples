@@ -1,6 +1,6 @@
 import FWCore.ParameterSet.Config as cms
-import URAnalysis.Ntuplizer.branches as branches
-from URAnalysis.PATTools.objects.trigger import trigger_paths
+import URNtuples.Ntuplizer.branches as branches
+from URNtuples.PATTools.objects.trigger import trigger_paths
 
 def make_ntuple(process, opts, ntuple_seq_name='ntuple', **kwargs):
 	'''
@@ -38,10 +38,31 @@ def make_ntuple(process, opts, ntuple_seq_name='ntuple', **kwargs):
 	if opts.reHLT:
 		process.trigger.trigger = cms.InputTag('TriggerResults', '', 'HLT2')
 	ntuple += process.trigger
-	
+
+	#MET filters defined here: https://twiki.cern.ch/twiki/bin/viewauth/CMS/MissingETOptionalFiltersRun2
 	process.filter = cms.EDAnalyzer(
 		'NtupleFilter',
-		filterSelection = cms.vstring("Flag_goodVertices", "Flag_CSCTightHaloFilter", "Flag_trkPOGFilters", "Flag_trkPOG_logErrorTooManyClusters", "Flag_EcalDeadCellTriggerPrimitiveFilter", "Flag_ecalLaserCorrFilter", "Flag_trkPOG_manystripclus53X", "Flag_eeBadScFilter", "Flag_METFilters", "Flag_HBHENoiseFilter", "Flag_trkPOG_toomanystripclus53X", "Flag_hcalLaserEventFilter"),
+		src = cms.InputTag('TriggerResults', '', 'PAT' if opts.isMC else 'RECO'),
+		filterSelection = cms.vstring(
+			"Flag_goodVertices", 
+			"Flag_CSCTightHaloFilter", 
+			"Flag_trkPOGFilters", 
+			"Flag_trkPOG_logErrorTooManyClusters", 
+			"Flag_EcalDeadCellTriggerPrimitiveFilter", 
+			"Flag_ecalLaserCorrFilter", 
+			"Flag_trkPOG_manystripclus53X", 
+			"Flag_eeBadScFilter", 
+			"Flag_METFilters", 
+			"Flag_HBHENoiseFilter", 
+			'Flag_HBHENoiseIsoFilter',
+			'Flag_globalTightHalo2016Filter',
+			"Flag_trkPOG_toomanystripclus53X", 
+			"Flag_hcalLaserEventFilter",
+			),
+		booleans = cms.VPSet(
+			cms.PSet(tag=cms.InputTag('BadPFMuonFilter'), name=cms.string('Flag_BadPFMuon')),
+			cms.PSet(tag=cms.InputTag('BadChargedCandidateFilter'), name=cms.string('Flag_BadChargedCandidate')),
+			),
 		branches = cms.VPSet(
 			)
 		)

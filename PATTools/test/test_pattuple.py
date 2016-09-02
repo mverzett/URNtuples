@@ -14,7 +14,7 @@ process.source = cms.Source(
     skipEvents=cms.untracked.uint32(15)
 )
 
-from URAnalysis.PATTools.customize_pat_production import customize
+from URNtuples.PATTools.customize_pat_production import customize
 
 schedule = customize(process, True, meta2edm=True)
 

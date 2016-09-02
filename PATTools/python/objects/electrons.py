@@ -10,7 +10,7 @@ customElectrons = cms.Sequence(
 )
 
 #trigger match
-from URAnalysis.PATTools.objects.trigger import trigger_paths, matchtemplate
+from URNtuples.PATTools.objects.trigger import trigger_paths, matchtemplate
 
 matchers = []
 elpaths = [i for i in trigger_paths if 'Ele' in i]

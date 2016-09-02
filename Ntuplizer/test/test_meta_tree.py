@@ -8,13 +8,13 @@ process.maxEvents = cms.untracked.PSet( input = cms.untracked.int32(10) )
 process.source = cms.Source("PoolSource",
     # replace 'myfile.root' with the source file you want to use                                                                                                                                                                           
     fileNames = cms.untracked.vstring(
-        'file:/afs/cern.ch/user/m/mverzett/work/framework/CMSSW_7_0_7_patch1/src/URAnalysis/PATTools/test/pat_test.root'
+        'file:/afs/cern.ch/user/m/mverzett/work/framework/CMSSW_7_0_7_patch1/src/URNtuples/PATTools/test/pat_test.root'
     )
 )
 
 process.load('Configuration.StandardSequences.Services_cff')
 process.load('DQMServices.Components.EDMtoMEConverter_cfi')
-process.load('URAnalysis.Ntuplizer.MetaNtuplize_cfi')
+process.load('URNtuples.Ntuplizer.MetaNtuplize_cfi')
 
 process.TFileService = cms.Service(
     "TFileService", 

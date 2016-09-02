@@ -1,5 +1,5 @@
 import FWCore.ParameterSet.Config as cms
-from URAnalysis.PATTools.objects.trigger import trigger_paths
+from URNtuples.PATTools.objects.trigger import trigger_paths
 paths_mu = [i for i in trigger_paths if 'Mu' in i]
 paths_el = [i for i in trigger_paths if 'Ele' in i]
 #FIXME: probably not the best possible name

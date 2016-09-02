@@ -1,12 +1,12 @@
 #! /bin/env cmsRun
 
 #make it executable
-from URAnalysis.Configuration.varparsing import options
+from URNtuples.Configuration.varparsing import options
 import FWCore.ParameterSet.Config as cms
-import URAnalysis.PATTools.custompat as urpat
-import URAnalysis.PATTools.customskims as urskims
-import URAnalysis.PATTools.meta  as meta
-import URAnalysis.Ntuplizer.ntuplizer as ntuple
+import URNtuples.PATTools.custompat as urpat
+import URNtuples.PATTools.customskims as urskims
+import URNtuples.PATTools.meta  as meta
+import URNtuples.Ntuplizer.ntuplizer as ntuple
 
 options.parseArguments()
 
@@ -85,7 +85,7 @@ else:
 
 #store meta
 process.load("Configuration.StandardSequences.Services_cff")
-process.load('URAnalysis.Ntuplizer.MetaNtuplize_cfi')
+process.load('URNtuples.Ntuplizer.MetaNtuplize_cfi')
 process.metaTree.isMC = cms.bool(options.isMC)
 process.meta = cms.Sequence(
    meta.embed_meta(process, options.isMC, options.computeWeighted and options.isMC) *
