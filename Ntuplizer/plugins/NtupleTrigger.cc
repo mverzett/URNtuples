@@ -105,7 +105,7 @@ void NtupleTrigger::analyze(const edm::Event& iEvent, const edm::EventSetup& iSe
 		const edm::TriggerNames& names = iEvent.triggerNames(*triggerBits);
 		for(size_t tr = 0 ; tr < triggerSelection_.size() ; ++tr)
 		{
-			selectedBits[tr] = 0;
+			selectedBits[tr] = -1;
 			for(size_t tn = 0 ; tn < triggerBits->size() ; ++tn)
 			{
 				if(names.triggerName(tn).find(triggerSelection_[tr]+"_v") != string::npos)
@@ -121,7 +121,7 @@ void NtupleTrigger::analyze(const edm::Event& iEvent, const edm::EventSetup& iSe
 	for(size_t i = 0 ; i < selectedBits.size() ; ++i)
 	{
 		//cout << i << " " << selectedBits[i] << " " << triggerBits->accept(selectedBits[i]) << endl;
-		if(selectedBits[i] == 0)
+		if(selectedBits[i] == -1)
 		{
 			results[i] = 0;
 			continue;
