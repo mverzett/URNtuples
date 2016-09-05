@@ -104,6 +104,7 @@ MetaNtuplizer::MetaNtuplizer(const edm::ParameterSet& iConfig):
   to_json_.insert(std::make_pair<std::string, std::string>("tuple_cmsswVersion", iConfig.getParameter<std::string>("cmsswVersion"))); 
   to_json_.insert(std::make_pair<std::string, std::string>("tuple_date", iConfig.getParameter<std::string>("date"))); 
   to_json_.insert(std::make_pair<std::string, std::string>("tuple_globalTag", iConfig.getParameter<std::string>("globalTag")));
+  to_json_.insert(std::make_pair<std::string, std::string>("tuple_args", iConfig.getParameter<std::string>("args")));
 }
 
 //
