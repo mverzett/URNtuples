@@ -29,14 +29,12 @@ def make_ntuple(process, opts, ntuple_seq_name='ntuple', **kwargs):
 	
 	process.trigger = cms.EDAnalyzer(
 		'NtupleTrigger',
-		trigger = cms.InputTag('TriggerResults', '', 'HLT'),
+		trigger = cms.InputTag(kwargs.get('triggerResults', 'TriggerResults::HLT')),
 		prescales = cms.InputTag('patTrigger'),
 		triggerSelection = cms.vstring(trigger_paths),
 		branches = cms.VPSet(
 			)
 		)
-	if opts.reHLT:
-		process.trigger.trigger = cms.InputTag('TriggerResults', '', 'HLT2')
 	ntuple += process.trigger
 
 	#MET filters defined here: https://twiki.cern.ch/twiki/bin/viewauth/CMS/MissingETOptionalFiltersRun2
