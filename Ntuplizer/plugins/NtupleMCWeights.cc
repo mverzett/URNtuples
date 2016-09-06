@@ -53,6 +53,7 @@ private:
    
   std::vector<float> weights;
   int npnlo;
+	int procId_;
 };
 
 // Constructor
@@ -65,7 +66,8 @@ NtupleMCWeights::NtupleMCWeights(edm::ParameterSet iConfig):
   // By having this class inherit from Obj2BranchBAse, we have access to our tree_, no need for TFileService
   // Book branches:
   tree_.branch(prefix_+SEPARATOR+"weights", &weights); 
-  tree_.branch(std::string("NPNLOLHE")+SEPARATOR+"npnlo", &npnlo, (std::string("NPNLOLHE")+SEPARATOR+"npnlo/I").c_str()); 
+  tree_.branch(std::string("LHEInfo")+SEPARATOR+"npnlo", &npnlo,  (std::string("LHEInfo")+SEPARATOR+"npnlo/I").c_str()); 
+	tree_.branch(std::string("LHEInfo")+SEPARATOR+"procID", &procId_, (std::string("LHEInfo")+SEPARATOR+"procID/I").c_str());
 }
 
 // Destructor
@@ -88,6 +90,7 @@ void NtupleMCWeights::analyze(const edm::Event& iEvent, const edm::EventSetup& i
 			//std::cout << w << " " << lheinfo->weights()[w].id << " " << lheinfo->weights()[w].wgt << std::endl;
 		}
 		npnlo = lheinfo->npNLO();
+		procId_ = lheinfo->hepeup().IDPRUP;
 		//std::cout << npnlo << std::endl;
 	} 
 }
