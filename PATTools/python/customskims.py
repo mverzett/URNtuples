@@ -1,8 +1,19 @@
 import FWCore.ParameterSet.Config as cms
+from URNtuples.PATTools.objects.trigger import mu_trg, el_trg
 from pdb import set_trace
 
 def add_skims(process, **collections):
 	'''returns a list of added sequences'''
+	process.muTrg = cms.EDFilter(
+		'TriggerResultsFilter',
+		hltResults = cms.InputTag(collections['triggerResults']),
+		throw = cms.bool(False), #if the trigger is not there do not get mad!
+		l1tResults = cms.InputTag(""),
+		l1tIgnoreMask = cms.bool(True),
+		l1techIgnorePrescales = cms.bool(True),
+		triggerConditions = cms.vstring(*['%s_v*' % i for i in mu_trg])
+		)
+
 	process.hiptMuons = cms.EDFilter(
 		"PATMuonSelector",
 		src = cms.InputTag(collections['muons']),
@@ -15,6 +26,10 @@ def add_skims(process, **collections):
 	 minNumber = cms.uint32(1)
 	 )
 	
+	process.elTrg = process.muTrg.clone(
+		triggerConditions = cms.vstring(*['%s_v*' % i for i in el_trg])
+		)
+
 	process.hiptElectrons = cms.EDFilter(
 		"PATElectronSelector",
 		src = cms.InputTag(collections['electrons']),
@@ -52,6 +67,11 @@ def add_skims(process, **collections):
 		process.fourJetFilter
 		)
 	
+	process.trgMuPlus4Jets = cms.Sequence(
+		process.muTrg *
+		process.muPlus4Jets
+		)
+
 	process.muPlus3Jets = cms.Sequence(
 		process.hiptMuons *
 		process.oneMuonFilter *
@@ -59,6 +79,11 @@ def add_skims(process, **collections):
 		process.threeJetFilter
 		)
 	
+	process.trgMuPlus3Jets = cms.Sequence(
+		process.muTrg *
+		process.muPlus3Jets
+		)
+
 	process.elPlus4Jets = cms.Sequence(
 		process.hiptElectrons *
 		process.oneElectronFilter *
@@ -66,17 +91,32 @@ def add_skims(process, **collections):
 		process.fourJetFilter
 		)
 	
+	process.trgElPlus4Jets = cms.Sequence(
+		process.elTrg *
+		process.elPlus4Jets
+		)
+
 	process.elPlus3Jets = cms.Sequence(
 		process.hiptElectrons *
 		process.oneElectronFilter *
 		process.hiPtJets *
 		process.threeJetFilter
 		)
+
+	process.trgElPlus3Jets = cms.Sequence(
+    process.elTrg *
+    process.elPlus3Jets
+    )
+
 	
 	return [
 		process.muPlus4Jets,
+		process.trgMuPlus4Jets,
 		process.muPlus3Jets,
+		process.trgMuPlus3Jets,
 		process.elPlus4Jets,
+		process.trgElPlus4Jets,
 		process.elPlus3Jets,
+		process.trgElPlus3Jets
 		]
 

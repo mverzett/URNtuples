@@ -58,6 +58,7 @@ collections = {
    'METs' : 'slimmedMETs',
    'NoHFMETs' : 'slimmedMETsNoHF',
    'genParticles' : 'prunedGenParticles',
+	 'triggerResults' : 'TriggerResults::HLT' if not options.reHLT else 'TriggerResults::HLT2',
    }
 sequence, collections = urpat.preprocess(process, options, **collections)
 process.preprocessing = sequence
@@ -77,6 +78,8 @@ if not options.noSkim:
 		else:
 			to_pick = set(options.skims.split(','))
 			skim_sequences = [i.label_() for i in skims]
+			if any(i not in skim_sequences for i in to_pick):
+				raise RuntimeError('You requested some skim paths that do not exist! I have : %s ' % skim_sequences.__repr__())
 			skim_sequences = filter(lambda x: x in to_pick, skim_sequences)
 	else:
 		skim_sequences = [i.label_() for i in skims]
@@ -92,7 +95,7 @@ process.meta = cms.Sequence(
    process.metaTree
    )
 process.metaTree.globalTag=process.GlobalTag.globaltag
-
+process.metaTree.args = {key : getattr(options, key) for key in options._register}.__repr__()
 #from pdb import set_trace
 #set_trace()
 #make custom PAT

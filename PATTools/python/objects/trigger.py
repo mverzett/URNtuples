@@ -4,8 +4,7 @@ import FWCore.ParameterSet.Config as cms
 # variables used by other modules, but here for consistency
 ###
 
-trigger_paths = [
-	#muons
+mu_trg = [
 	#single
 	'HLT_IsoMu18',
 	'HLT_IsoMu20',
@@ -24,7 +23,9 @@ trigger_paths = [
 	'HLT_DoubleIsoMu17_eta2p1',
 	'HLT_Mu17_TrkIsoVVL_Mu8_TrkIsoVVL_DZ',
 	'HLT_Mu17_TrkIsoVVL_TkMu8_TrkIsoVVL_DZ',
-	
+]
+
+el_trg = [
 	#electrons
 	#single
 	'HLT_Ele22_eta2p1_WPLoose_Gsf',
@@ -37,11 +38,14 @@ trigger_paths = [
 	'Ele35_WPLoose_Gsf',
 	#double	
 	'HLT_DoubleEle33_CaloIdL_GsfTrkIdVL',
-	'HLT_Ele23_Ele12_CaloIdL_TrackIdL_IsoVL_DZ'
+	'HLT_Ele23_Ele12_CaloIdL_TrackIdL_IsoVL_DZ',
+]
 
-	#dummy
+dummy_trg = [
 	'HLT_notexists',
 	]
+
+trigger_paths = mu_trg + el_trg + dummy_trg
 
 matchtemplate = cms.EDProducer(
    "PATTriggerMatcherDRDPtLessByR",
@@ -62,13 +66,7 @@ matchtemplate = cms.EDProducer(
 #respect any coding convention, no src or similar,
 #just leave it hardcoded and hope for the best!
 from PhysicsTools.PatAlgos.slimming.unpackedPatTrigger_cfi import unpackedPatTrigger
-#
-#triggerEvent = cms.EDProducer(
-#   'URTriggerProducer',
-#   bits = cms.InputTag('TriggerResults::HLT'),
-#   prescales = cms.InputTag('patTrigger'),
-#)
-#
+
 customTrigger = cms.Sequence(
    unpackedPatTrigger
 #   triggerEvent
