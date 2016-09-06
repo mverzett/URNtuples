@@ -1,0 +1,13 @@
+diff --git a/PhysicsTools/PatUtils/interface/SmearedJetProducerT.h b/PhysicsTools/PatUtils/interface/SmearedJetProducerT.h
+index 2d3bf3e..a877dbd 100644
+--- a/PhysicsTools/PatUtils/interface/SmearedJetProducerT.h
++++ b/PhysicsTools/PatUtils/interface/SmearedJetProducerT.h
+@@ -263,7 +263,7 @@ class SmearedJetProducerT : public edm::stream::EDProducer<> {
+             }
+ 
+             // Sort jets by pt
+-            std::sort(smearedJets->begin(), smearedJets->end(), jetPtComparator);
++            //std::sort(smearedJets->begin(), smearedJets->end(), jetPtComparator);
+ 
+             event.put(std::move(smearedJets));
+         }
