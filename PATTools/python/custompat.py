@@ -6,6 +6,9 @@ from PhysicsTools.PatAlgos.tools.helpers import massSearchReplaceAnyInputTag
 from URNtuples.Utilities.version import cmssw_version 
 from URNtuples.PATTools.objects.jetmet import rerun_JECJER
 
+def pippo():
+	pass
+
 def preprocess(process, opts, **collections):
 	'''Runs preliminary pat customization (JEC, MET corrections, etc...)
 	returns the dict of final products, and the preprocessing sequence'''
@@ -75,55 +78,53 @@ def preprocess(process, opts, **collections):
 	return process.preprocessing, collections
 
 def customize(process, opts, **collections):
-    '''Returns a tuple containing the custom PAT 
-    Sequence label and final collection names'''
-    #load custom objects
-    #trigger is a mess, does not respect conding conventions
-    #when changing something have a look at the module
-    #itself
-    process.load('URNtuples.PATTools.objects.trigger')
-    collections['trigger'] = 'triggerEvent'
-    
-    process.load('URNtuples.PATTools.objects.vertices')
-    if opts.reHLT:
-        process.unpackedPatTrigger.triggerResults = cms.InputTag("TriggerResults","","HLT2")
-    collections['vertices'] = cfgtools.chain_sequence(
-        process.customVertices,
-        collections['vertices']
-        )
+	'''Returns a tuple containing the custom PAT 
+	Sequence label and final collection names'''
+	#load custom objects
+	#trigger is a mess, does not respect conding conventions
+	#when changing something have a look at the module
+	#itself
+	process.load('URNtuples.PATTools.objects.trigger')
+	collections['trigger'] = 'triggerEvent'
+	process.unpackedPatTrigger.triggerResults = cms.InputTag(collections['triggerResults'])
+	
+	process.load('URNtuples.PATTools.objects.vertices')
+	collections['vertices'] = cfgtools.chain_sequence(
+		process.customVertices,
+		collections['vertices']
+		)
 
-    process.load('URNtuples.PATTools.objects.muons')
-    collections['muons'] = cfgtools.chain_sequence(
-        process.customMuons,
-        collections['muons']
-        )
-    process.muonIpInfo.vtxSrc = collections['vertices']
+	process.load('URNtuples.PATTools.objects.muons')
+	collections['muons'] = cfgtools.chain_sequence(
+		process.customMuons,
+		collections['muons']
+		)
+	process.muonIpInfo.vtxSrc = collections['vertices']
 
-    process.load('URNtuples.PATTools.objects.electrons')
-    collections['electrons'] = cfgtools.chain_sequence(
-        process.customElectrons,
-        collections['electrons']
-        )
-    process.electronIpInfo.vtxSrc = collections['vertices']
-    
-    import URNtuples.PATTools.objects.jets as jets
-    jet_sequence, collections['jets'] = jets.add_jets(process, collections['jets'], opts)
+	process.load('URNtuples.PATTools.objects.electrons')
+	collections['electrons'] = cfgtools.chain_sequence(
+		process.customElectrons,
+		collections['electrons']
+		)
+	process.electronIpInfo.vtxSrc = collections['vertices']
+	
+	import URNtuples.PATTools.objects.jets as jets
+	jet_sequence, collections['jets'] = jets.add_jets(process, collections['jets'], opts)
 
-    process.customPAT = cms.Sequence(
-        process.customTrigger *
-        process.customVertices *
-        process.customMuons *
-        process.customElectrons *
-        jet_sequence
-        )
+	process.customPAT = cms.Sequence(
+		process.customTrigger *
+		process.customVertices *
+		process.customMuons *
+		process.customElectrons *
+		jet_sequence
+		)
 
-    ## if isMC:
-    ##     process.load("TopQuarkAnalysis.TopEventProducers.producers.pseudoTop_cfi")
-    ##     process.customPAT += process.pseudoTop
-    ##     collections['PSTjets'] = 'pseudoTop:jets'
-    ##     collections['PSTleptons'] = 'pseudoTop:leptons'
-    ##     collections['PSTs'] = 'pseudoTop'
-    ##     collections['PSTneutrinos'] = 'pseudoTop:neutrinos'
+	## if isMC:
+	##	 process.load("TopQuarkAnalysis.TopEventProducers.producers.pseudoTop_cfi")
+	##	 process.customPAT += process.pseudoTop
+	##	 collections['PSTjets'] = 'pseudoTop:jets'
+	##	 collections['PSTleptons'] = 'pseudoTop:leptons'
+	##	 collections['PSTs'] = 'pseudoTop'
+	##	 collections['PSTneutrinos'] = 'pseudoTop:neutrinos'
 
-    return process.customPAT, collections
-        
+	return process.customPAT, collections
