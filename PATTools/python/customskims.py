@@ -42,10 +42,13 @@ def add_skims(process, **collections):
 		minNumber = cms.uint32(1)
 		)
 	
+	jetptthr = '20'
+	template = '(hasUserCand("{name}") && userCand("{name}").pt() > {thr})'
+	cuts = ' || '.join([template.format(name=i, thr=jetptthr) for i in ['JES+', 'JES-', 'JER', 'JER+', 'JER-']])
 	process.hiPtJets = cms.EDFilter(
 		"PATJetSelector",
 		src = cms.InputTag(collections['jets']),
-		cut = cms.string('pt > 20 && abs(eta) < 10')
+		cut = cms.string('(pt > %s || %s) && abs(eta) < 10' % (jetptthr, cuts))
 	)
 	
 	process.threeJetFilter = cms.EDFilter(
