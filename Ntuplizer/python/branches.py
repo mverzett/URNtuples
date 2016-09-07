@@ -304,6 +304,8 @@ vertex_specific = [
    make_branch_pset('chi2'),
    make_branch_pset('ndof'),
    make_branch_pset('nTracks'),
+	 make_branch_pset('isFake', '', '/O'),
+	 make_branch_pset('rho', 'position.rho')
    #SumPtQ
 ]
 
