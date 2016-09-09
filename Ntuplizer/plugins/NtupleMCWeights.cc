@@ -63,6 +63,7 @@ NtupleMCWeights::NtupleMCWeights(edm::ParameterSet iConfig):
 	srcToken_(consumes<LHEEventProduct>(src_))
 	//weights(1)
 {
+	std::cout << "NtupleMCWeights::NtupleMCWeights" << std::endl;
   // By having this class inherit from Obj2BranchBAse, we have access to our tree_, no need for TFileService
   // Book branches:
   tree_.branch(prefix_+SEPARATOR+"weights", &weights); 
@@ -80,20 +81,20 @@ void NtupleMCWeights::analyze(const edm::Event& iEvent, const edm::EventSetup& i
 	weights.clear();
 
 	edm::Handle<LHEEventProduct> lheinfo;
-	iEvent.getByToken(srcToken_, lheinfo);
-	if(lheinfo.isValid())
+	iEvent.getByToken(srcToken_, lheinfo);	
+	
+	for(size_t w = 0 ; w < lheinfo->weights().size() ; ++w)
 	{
-		for(size_t w = 0 ; w < lheinfo->weights().size() ; ++w)
-		{
-			//weights[0].push_back(lheinfo->weights()[w].wgt);
-			weights.push_back(lheinfo->weights()[w].wgt);
-			//std::cout << w << " " << lheinfo->weights()[w].id << " " << lheinfo->weights()[w].wgt << std::endl;
-		}
-		npnlo = lheinfo->npNLO();
-		procId_ = lheinfo->hepeup().IDPRUP;
-		//std::cout << npnlo << std::endl;
-	} 
+		//weights[0].push_back(lheinfo->weights()[w].wgt);
+		weights.push_back(lheinfo->weights()[w].wgt);
+		//std::cout << w << " " << lheinfo->weights()[w].id << " " << lheinfo->weights()[w].wgt << std::endl;
+	}
+	npnlo = lheinfo->npNLO();
+	procId_ = lheinfo->hepeup().IDPRUP;
+	//std::cout << lheinfo->hepeup().IDPRUP << std::endl;
+	//std::cout << npnlo << std::endl;
 }
+
 
 #include "FWCore/Framework/interface/MakerMacros.h"
 DEFINE_FWK_MODULE(NtupleMCWeights);
