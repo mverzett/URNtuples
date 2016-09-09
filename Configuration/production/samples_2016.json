@@ -547,6 +547,7 @@
 			"runJEC": true
 		},
 		"name": "HtoTT_M400_5pc_Peak",
+		"DBSInstance" : "phys03",
 		"xsection": 1.2664
 	},
 	{
@@ -561,6 +562,7 @@
 			"runJEC": true
 		},
 		"name": "HtoTT_M400_5pc_Int",
+		"DBSInstance" : "phys03",
 		"xsection": 1.6083
 	},
 	{
@@ -575,6 +577,7 @@
 			"runJEC": true
 		},
 		"name": "HtoTT_M400_10pc_Peak",
+		"DBSInstance" : "phys03",
 		"xsection": 0.5681
 	},
 	{
@@ -589,6 +592,7 @@
 			"runJEC": true
 		},
 		"name": "HtoTT_M400_10pc_Int",
+		"DBSInstance" : "phys03",
 		"xsection": 1.5247
 	},
 	{
@@ -603,6 +607,7 @@
 			"runJEC": true
 		},
 		"name": "HtoTT_M400_25pc_Peak",
+		"DBSInstance" : "phys03",
 		"xsection": 0.17385
 	},
 	{
@@ -617,6 +622,7 @@
 			"runJEC": true
 		},
 		"name": "HtoTT_M400_25pc_Int",
+		"DBSInstance" : "phys03",
 		"xsection": 1.2426
 	},
 	{
@@ -631,6 +637,7 @@
 			"runJEC": true
 		},
 		"name": "HtoTT_M400_50pc_Peak",
+		"DBSInstance" : "phys03",
 		"xsection": 0.06458
 	},
 	{
@@ -645,6 +652,7 @@
 			"runJEC": true
 		},
 		"name": "HtoTT_M400_50pc_Int",
+		"DBSInstance" : "phys03",
 		"xsection": 0.9050
 	},
 
@@ -661,6 +669,7 @@
 			"runJEC": true
 		},
 		"name": "HtoTT_M500_5pc_Peak",
+		"DBSInstance" : "phys03",
 		"xsection": 0.6096
 	},
 	{
@@ -675,6 +684,7 @@
 			"runJEC": true
 		},
 		"name": "HtoTT_M500_5pc_Int",
+		"DBSInstance" : "phys03",
 		"xsection": 0.3666
 	},
 	{
@@ -689,6 +699,7 @@
 			"runJEC": true
 		},
 		"name": "HtoTT_M500_10pc_Peak",
+		"DBSInstance" : "phys03",
 		"xsection": 0.2890
 	},
 	{
@@ -703,6 +714,7 @@
 			"runJEC": true
 		},
 		"name": "HtoTT_M500_10pc_Int",
+		"DBSInstance" : "phys03",
 		"xsection": 0.4087
 	},
 	{
@@ -717,6 +729,7 @@
 			"runJEC": true
 		},
 		"name": "HtoTT_M500_25pc_Peak",
+		"DBSInstance" : "phys03",
 		"xsection": 0.09746
 	},
 	{
@@ -731,6 +744,7 @@
 			"runJEC": true
 		},
 		"name": "HtoTT_M500_25pc_Int",
+		"DBSInstance" : "phys03",
 		"xsection": 0.46547
 	},
 	{
@@ -745,6 +759,7 @@
 			"runJEC": true
 		},
 		"name": "HtoTT_M500_50pc_Peak",
+		"DBSInstance" : "phys03",
 		"xsection": 0.03711
 	},
 	{
@@ -758,6 +773,7 @@
 			"globalTag": "80X_mcRun2_asymptotic_2016_miniAODv2_v1",
 			"runJEC": true
 		},
+		"DBSInstance" : "phys03",
 		"name": "HtoTT_M500_50pc_Int",
 		"xsection": 0.44323
 	},
@@ -774,6 +790,7 @@
 			"globalTag": "80X_mcRun2_asymptotic_2016_miniAODv2_v1",
 			"runJEC": true
 		},
+		"DBSInstance" : "phys03",
 		"name": "HtoTT_M600_5pc_Peak",
 		"xsection": 0.2650
 	},
@@ -788,6 +805,7 @@
 			"globalTag": "80X_mcRun2_asymptotic_2016_miniAODv2_v1",
 			"runJEC": true
 		},
+		"DBSInstance" : "phys03",
 		"name": "HtoTT_M600_5pc_Int",
 		"xsection": 0.03008
 	},
@@ -802,6 +820,7 @@
 			"globalTag": "80X_mcRun2_asymptotic_2016_miniAODv2_v1",
 			"runJEC": true
 		},
+		"DBSInstance" : "phys03",
 		"name": "HtoTT_M600_10pc_Peak",
 		"xsection": 0.1295
 	},
@@ -816,6 +835,7 @@
 			"globalTag": "80X_mcRun2_asymptotic_2016_miniAODv2_v1",
 			"runJEC": true
 		},
+		"DBSInstance" : "phys03",
 		"name": "HtoTT_M600_10pc_Int",
 		"xsection": 0.0701
 	},
@@ -830,6 +850,7 @@
 			"globalTag": "80X_mcRun2_asymptotic_2016_miniAODv2_v1",
 			"runJEC": true
 		},
+		"DBSInstance" : "phys03",
 		"name": "HtoTT_M600_25pc_Peak",
 		"xsection": 0.0470
 	},
@@ -844,6 +865,7 @@
 			"globalTag": "80X_mcRun2_asymptotic_2016_miniAODv2_v1",
 			"runJEC": true
 		},
+		"DBSInstance" : "phys03",
 		"name": "HtoTT_M600_25pc_Int",
 		"xsection": 0.15424
 	},
@@ -858,6 +880,7 @@
 			"globalTag": "80X_mcRun2_asymptotic_2016_miniAODv2_v1",
 			"runJEC": true
 		},
+		"DBSInstance" : "phys03",
 		"name": "HtoTT_M600_50pc_Peak",
 		"xsection": 0.01917
 	},
@@ -872,6 +895,7 @@
 			"globalTag": "80X_mcRun2_asymptotic_2016_miniAODv2_v1",
 			"runJEC": true
 		},
+		"DBSInstance" : "phys03",
 		"name": "HtoTT_M600_50pc_Int",
 		"xsection": 0.210
 	},
@@ -887,6 +911,7 @@
 			"globalTag": "80X_mcRun2_asymptotic_2016_miniAODv2_v1",
 			"runJEC": true
 		},
+		"DBSInstance" : "phys03",
 		"name": "HtoTT_M750_5pc_Peak",
 		"xsection": 0.08387
 	},
@@ -901,6 +926,7 @@
 			"globalTag": "80X_mcRun2_asymptotic_2016_miniAODv2_v1",
 			"runJEC": true
 		},
+		"DBSInstance" : "phys03",
 		"name": "HtoTT_M750_5pc_Int",
 		"xsection": 0.07588
 	},
@@ -915,6 +941,7 @@
 			"globalTag": "80X_mcRun2_asymptotic_2016_miniAODv2_v1",
 			"runJEC": true
 		},
+		"DBSInstance" : "phys03",
 		"name": "HtoTT_M750_10pc_Peak",
 		"xsection": 0.04246
 	},
@@ -929,6 +956,7 @@
 			"globalTag": "80X_mcRun2_asymptotic_2016_miniAODv2_v1",
 			"runJEC": true
 		},
+		"DBSInstance" : "phys03",
 		"name": "HtoTT_M750_10pc_Int",
 		"xsection": 0.05138
 	},
@@ -943,6 +971,7 @@
 			"globalTag": "80X_mcRun2_asymptotic_2016_miniAODv2_v1",
 			"runJEC": true
 		},
+		"DBSInstance" : "phys03",
 		"name": "HtoTT_M750_25pc_Peak",
 		"xsection": 0.01682
 	},
@@ -957,6 +986,7 @@
 			"globalTag": "80X_mcRun2_asymptotic_2016_miniAODv2_v1",
 			"runJEC": true
 		},
+		"DBSInstance" : "phys03",
 		"name": "HtoTT_M750_25pc_Int",
 		"xsection": 0.01058
 	},
@@ -971,6 +1001,7 @@
 			"globalTag": "80X_mcRun2_asymptotic_2016_miniAODv2_v1",
 			"runJEC": true
 		},
+		"DBSInstance" : "phys03",
 		"name": "HtoTT_M750_50pc_Peak",
 		"xsection": 0.00753
 	},
@@ -985,6 +1016,7 @@
 			"globalTag": "80X_mcRun2_asymptotic_2016_miniAODv2_v1",
 			"runJEC": true
 		},
+		"DBSInstance" : "phys03",
 		"name": "HtoTT_M750_50pc_Int",
 		"xsection": 0.0708
 	},
