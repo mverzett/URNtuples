@@ -80,7 +80,7 @@ if not os.path.isdir(args.jobid):
 
 all_samples = prettyjson.loads(open(args.sample_def).read())
 to_submit = filter(
-   lambda x: any(fnmatch(x, pattern) for pattern in args.samples),
+   lambda x: any(fnmatch(x['name'], pattern) for pattern in args.samples),
 	 all_samples
 )
 pyargs = parse_pyargs(args.options)
