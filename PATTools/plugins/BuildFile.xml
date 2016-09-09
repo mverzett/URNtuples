@@ -12,6 +12,7 @@
   <use name="DQMServices/Core"/>
   <use name="SimDataFormats/PileupSummaryInfo"/>
   <use name="CommonTools/Utils"/>
+  <use name="CommonTools/UtilAlgos"/>	
   <use name="DataFormats/PatCandidates"/>
   <use name="DataFormats/Common"/>
 </library> 
