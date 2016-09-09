@@ -26,7 +26,7 @@ parser.add_argument('--options', type=str, help='command-line arguments'
 parser.add_argument('--njobs', type=int, help='how many jobs should I run?'
                     ' (-1 for one for each input file)', default=-1)
 parser.add_argument('--sample-def', dest='sample_def', type=str,
-                    help='json file containing the samples definition ', default="%s/samples.json" % os.environ["URA_PROJECT"])
+                    help='json file containing the samples definition ', default="dummy.json")
 parser.add_argument('--crab', dest='crab', type=int,
                     default=3, help='Version of crab to use')
 parser.add_argument('--local', dest='local', action='store_true',
@@ -119,7 +119,7 @@ for sample in to_submit:
          dump_pyargs(opts),
          args.njobs if args.njobs > 0 else None,
          externals,
-         os.path.join(os.environ['URA_PROJECT'], sample['lumimask']) if 'lumimask' in sample else '',
+         os.path.join(os.environ['URN'], 'Configuration/production/lumimasks', sample['lumimask']) if 'lumimask' in sample else '',
 				 sample['DBSInstance'] if 'DBSInstance' in sample else None
          )
       )
