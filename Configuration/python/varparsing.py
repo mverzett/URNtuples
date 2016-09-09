@@ -46,6 +46,13 @@ options.register(
    'Run in ReHLT mode, changes trigger input'
 )
 options.register(
+   'FilterLHEID',
+   0,
+   VarParsing.multiplicity.singleton,
+   VarParsing.varType.int,
+   'Filter events according to LHE.hepeup().IDPRUP (default OFF)'
+)
+options.register(
    'JECDb',
    '',
    VarParsing.multiplicity.singleton,
@@ -74,6 +81,21 @@ options.register(
    VarParsing.varType.bool,
 	'store LHE particles'
 )	
+options.register(
+	'storeLHEWeights',
+	True,
+   VarParsing.multiplicity.singleton,
+   VarParsing.varType.bool,
+	'store LHE weights'
+)	
+options.register(
+	'LHEInstance',
+	'externalLHEProducer',
+	VarParsing.multiplicity.singleton,
+	VarParsing.varType.string,
+  'LHE name Instance'
+)
+
 options.register(
    'makeJetTracks',
    False,

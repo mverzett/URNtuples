@@ -219,19 +219,20 @@ def make_ntuple(process, opts, ntuple_seq_name='ntuple', **kwargs):
 		)
 	ntuple += process.genInfo
 	
-	process.MCWeights = cms.EDAnalyzer(
-		'NtupleMCWeights',
-		src = cms.InputTag(
-			kwargs.get(
-				'MCWeigths',
-				'externalLHEProducer'
-				)
-			),
-		branches = cms.VPSet(
-			),
-		computeWeighted = cms.bool(opts.computeWeighted)
-		)
-	ntuple += process.MCWeights
+	if opts.storeLHEWeights:
+		process.MCWeights = cms.EDAnalyzer(
+			'NtupleMCWeights',
+			src = cms.InputTag(
+				kwargs.get(
+					'MCWeigths',
+					'externalLHEProducer'
+					)
+				),
+			branches = cms.VPSet(
+				),
+			computeWeighted = cms.bool(opts.computeWeighted)
+			)
+		ntuple += process.MCWeights
 	
 	process.PUInfos = cms.EDAnalyzer(
 		'NtuplePUInfoProducer',

@@ -59,6 +59,7 @@ collections = {
    'NoHFMETs' : 'slimmedMETsNoHF',
    'genParticles' : 'prunedGenParticles',
 	 'triggerResults' : 'TriggerResults::HLT' if not options.reHLT else 'TriggerResults::HLT2',
+	 'MCWeigths' : options.LHEInstance
    }
 sequence, collections = urpat.preprocess(process, options, **collections)
 process.preprocessing = sequence
@@ -112,6 +113,15 @@ ntuple_sequence, ntuple_end = ntuple.make_ntuple(
    **collections
    )
 
+process.lheskimming = cms.Sequence()
+if options.FilterLHEID:
+	process.skimLHE = cms.EDFilter(
+		'LHEEventProductFilter',
+		src = cms.InputTag(collections.get('MCWeigths', 'externalLHEProducer')),
+		cut = cms.string('hepeup().IDPRUP == %i' % options.FilterLHEID)
+		)
+	process.lheskimming *= process.skimLHE
+
 process.schedule = cms.Schedule()
 #make meta+skim+customPAT+Ntuple paths
 #one for each skim sequence
@@ -119,37 +129,39 @@ process.schedule = cms.Schedule()
 #https://hypernews.cern.ch/HyperNews/CMS/get/edmFramework/3416/1.html
 
 if skim_sequences:
-   for skim in skim_sequences:
-      path_name = skim+'Path0'
-      #assure to make NEW path name
-      idx = 1
-      while hasattr(process, path_name):
-         path_name = path_name[:-1]+str(idx)
-         idx += 1
-      setattr(
-         process,
-         path_name,
-         cms.Path(
-            process.meta *
-            process.preprocessing *
-            getattr(process, skim) *
-            custom_pat_sequence *
-            ntuple_sequence *
-            ntuple_end
-            )
-         )
-      process.schedule.append(
-         getattr(process, path_name)
-         )
+	for skim in skim_sequences:
+		path_name = skim+'Path0'
+		#assure to make NEW path name
+		idx = 1
+		while hasattr(process, path_name):
+			path_name = path_name[:-1]+str(idx)
+			idx += 1
+		setattr(
+			process,
+			path_name,
+			cms.Path(
+				process.lheskimming *
+				process.meta *
+				process.preprocessing *
+				getattr(process, skim) *
+				custom_pat_sequence *
+				ntuple_sequence *
+				ntuple_end
+				)
+			)
+		process.schedule.append(
+			getattr(process, path_name)
+			)
 else:
-   process.passThroughPath = cms.Path(
-      process.meta *
-      process.preprocessing *
-      custom_pat_sequence *
-      ntuple_sequence *
-      ntuple_end
-      )
-   process.schedule.append(process.passThroughPath)
+	process.passThroughPath = cms.Path(
+		process.lheskimming *
+		process.meta *
+		process.preprocessing *
+		custom_pat_sequence *
+		ntuple_sequence *
+		ntuple_end
+		)
+	process.schedule.append(process.passThroughPath)
 
 if options.edm:
 	process.edmOut = cms.OutputModule(
