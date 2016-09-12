@@ -219,7 +219,7 @@ def make_ntuple(process, opts, ntuple_seq_name='ntuple', **kwargs):
 		)
 	ntuple += process.genInfo
 	
-	if opts.storeLHEWeights:
+	if opts.storeLHEWeights and opts.isMC:
 		process.MCWeights = cms.EDAnalyzer(
 			'NtupleMCWeights',
 			src = cms.InputTag(
