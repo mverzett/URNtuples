@@ -1057,7 +1057,7 @@
 			"skims": "trgMuPlus3Jets",
 			"globalTag": "80X_dataRun2_Prompt_ICHEP16JEC_v0"
 		},
-		"name": "data_SingleMuon_2016C",
+		"name": "data_SingleMuon_2016D",
 		"lumimask": "Cert_271036-276811_13TeV_PromptReco_Collisions16_JSON.txt"
 	},
 	{
@@ -1090,7 +1090,7 @@
 			"skims": "trgElPlus3Jets",
 			"globalTag": "80X_dataRun2_Prompt_ICHEP16JEC_v0"
 		},
-		"name": "data_SingleElectron_2016C",
+		"name": "data_SingleElectron_2016D",
 		"lumimask": "Cert_271036-276811_13TeV_PromptReco_Collisions16_JSON.txt"
 	}
 ]
