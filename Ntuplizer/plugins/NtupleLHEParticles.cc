@@ -43,6 +43,7 @@ private:
   bool isMC_;
   edm::InputTag src_;
   edm::EDGetTokenT<LHEEventProduct> srcToken_;
+	bool active_;
    
   std::vector<float> px_;
   std::vector<float> py_;
@@ -59,7 +60,8 @@ private:
 NtupleLHEParticles::NtupleLHEParticles(edm::ParameterSet iConfig): 
 	Obj2BranchBase(iConfig),
 	src_(iConfig.getParameter<edm::InputTag>("src")),
-	srcToken_(consumes<LHEEventProduct>(src_))
+	srcToken_(consumes<LHEEventProduct>(src_)),
+	active_(iConfig.getParameter<bool>("active"))
 {
   // By having this class inherit from Obj2BranchBAse, we have access to our tree_, no need for TFileService
   // Book branches:

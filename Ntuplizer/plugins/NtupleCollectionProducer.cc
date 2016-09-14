@@ -52,6 +52,7 @@ private:
 
   edm::InputTag src_;
   edm::EDGetTokenT< std::vector<EDObject> > srcToken_;
+	bool active_;
   std::vector< ObjExpression<EDObject>* > branches_;
 };
 
@@ -59,7 +60,8 @@ template <class EDObject>
 NtupleCollectionProducer<EDObject>::NtupleCollectionProducer(edm::ParameterSet cfg):
   Obj2BranchBase(cfg),
   src_(cfg.getParameter<edm::InputTag>("src")),
-  srcToken_(consumes< std::vector<EDObject> >(src_))
+  srcToken_(consumes< std::vector<EDObject> >(src_)),
+	active_(cfg.existsAs<bool>("active") ? cfg.getParameter<bool>("active") : true)
 {
   std::vector< edm::ParameterSet > branches = cfg.getParameter<std::vector< edm::ParameterSet > >("branches");
   branches_.reserve(branches.size());
@@ -82,14 +84,14 @@ NtupleCollectionProducer<EDObject>::NtupleCollectionProducer(edm::ParameterSet c
 template <class EDObject>
 void NtupleCollectionProducer<EDObject>::analyze(const edm::Event& evt, const edm::EventSetup&)
 {
+  if(!active_) return;
+
   //before all, clear the vectors
   clear();
 
   //
   edm::Handle< std::vector<EDObject> > handle;
   evt.getByToken(srcToken_, handle);
-
-  if(!handle.isValid()) return;
 
   size_t size = handle->size();
 //  std::cout << "got " << src_ << " with size: " << size << std::endl;

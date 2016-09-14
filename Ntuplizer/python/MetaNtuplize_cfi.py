@@ -11,5 +11,6 @@ metaTree = cms.EDAnalyzer(
     cmsswVersion= cms.string( version.cmssw_version()),
     date=cms.string(time.strftime("%d %b %Y %H:%M:%S +0000", time.gmtime())),
     globalTag=cms.string(''),
-		args = cms.string('')
+		args = cms.string(''),
+		hasLHE=cms.bool(True)
 )

@@ -215,24 +215,25 @@ def make_ntuple(process, opts, ntuple_seq_name='ntuple', **kwargs):
 			),
 		branches = cms.VPSet(
 			branches.geninfo_scpecific
-			)
+			),
+		active = cms.bool(opts.isMC)
 		)
 	ntuple += process.genInfo
 	
-	if opts.storeLHEWeights and opts.isMC:
-		process.MCWeights = cms.EDAnalyzer(
-			'NtupleMCWeights',
-			src = cms.InputTag(
-				kwargs.get(
-					'MCWeigths',
-					'externalLHEProducer'
-					)
-				),
-			branches = cms.VPSet(
-				),
-			computeWeighted = cms.bool(opts.computeWeighted)
-			)
-		ntuple += process.MCWeights
+	process.MCWeights = cms.EDAnalyzer(
+		'NtupleMCWeights',
+		src = cms.InputTag(
+			kwargs.get(
+				'MCWeigths',
+				'externalLHEProducer'
+				)
+			),
+		branches = cms.VPSet(
+			),
+		computeWeighted = cms.bool(opts.computeWeighted),
+		active = cms.bool(opts.storeLHEWeights and opts.isMC)
+		)
+	ntuple += process.MCWeights
 	
 	process.PUInfos = cms.EDAnalyzer(
 		'NtuplePUInfoProducer',
@@ -242,6 +243,7 @@ def make_ntuple(process, opts, ntuple_seq_name='ntuple', **kwargs):
 				'slimmedAddPileupInfo'
 				)
 			),
+		active = cms.bool(opts.isMC),
 		branches = cms.VPSet(
 			branches.puinfo_specific
 			)
@@ -257,6 +259,7 @@ def make_ntuple(process, opts, ntuple_seq_name='ntuple', **kwargs):
 				'prunedGenParticles'
 				)
 			),
+		active = cms.bool(opts.isMC),
 		branches = cms.VPSet(
 			branches.kinematics +
 			branches.gen_particle_specific
@@ -267,6 +270,7 @@ def make_ntuple(process, opts, ntuple_seq_name='ntuple', **kwargs):
 	if opts.storeLHEParticles:
 		process.LHEPaticles = cms.EDAnalyzer(
 			'NtupleLHEParticles',
+			active = cms.bool(opts.isMC and opts.storeLHEParticles),
 			src = cms.InputTag(
 				kwargs.get(
 					'MCWeigths',
@@ -286,6 +290,7 @@ def make_ntuple(process, opts, ntuple_seq_name='ntuple', **kwargs):
 					'pseudoTop:jets'
 					)
 				),
+			active = cms.bool(opts.isMC and opts.makePSTop),
 			branches = cms.VPSet(
 				branches.kinematics +
 				branches.genjet_specific
@@ -301,6 +306,7 @@ def make_ntuple(process, opts, ntuple_seq_name='ntuple', **kwargs):
 					'pseudoTop:leptons'
 					)
 				),
+			active = cms.bool(opts.isMC and opts.makePSTop),
 			branches = cms.VPSet(
 				branches.kinematics +
 				branches.genjet_specific
@@ -316,6 +322,7 @@ def make_ntuple(process, opts, ntuple_seq_name='ntuple', **kwargs):
 					'pseudoTop'
 					)
 				),
+			active = cms.bool(opts.isMC and opts.makePSTop),
 			branches = cms.VPSet(
 				branches.kinematics +
 				branches.gen_particle_specific
@@ -331,6 +338,7 @@ def make_ntuple(process, opts, ntuple_seq_name='ntuple', **kwargs):
                                   'pseudoTop:neutrinos'
                                   )
 				),
+			active = cms.bool(opts.isMC and opts.makePSTop),
 			branches = cms.VPSet(
 				branches.kinematics +
 				branches.gen_particle_specific
@@ -342,6 +350,7 @@ def make_ntuple(process, opts, ntuple_seq_name='ntuple', **kwargs):
 		'NtupleGenParticleInheritance',
 		label = cms.string('genParticles'),
 		src = cms.InputTag('prunedGenParticles'),
+		active = cms.bool(opts.isMC),
 		)
 	ntuple += process.genPInheritance
 	
@@ -353,6 +362,7 @@ def make_ntuple(process, opts, ntuple_seq_name='ntuple', **kwargs):
 				'slimmedGenJets'
 				)
 			),
+		active = cms.bool(opts.isMC),
 		branches = cms.VPSet(
 			branches.kinematics +
 			branches.genjet_specific

@@ -70,7 +70,7 @@ private:
 
   TTree *meta_tree_;
   std::map<std::string, std::string> to_json_;
-  bool string_dumped_, isMC_, useWeighted_, triedWeighted_;
+  bool string_dumped_, isMC_, hasLhe_, useWeighted_, triedWeighted_;
   MonitorElement *pu_distro_;
   MonitorElement *pu_distro_w_;
   unsigned int lumi_;
@@ -92,9 +92,10 @@ private:
 //
 MetaNtuplizer::MetaNtuplizer(const edm::ParameterSet& iConfig):
   weights_src_(iConfig.getParameter<edm::InputTag>("weightsSrc") ),
-  weights_srcToken_(consumes<LHEEventProduct>(weights_src_)),
+  weights_srcToken_(consumes<LHEEventProduct>(weights_src_)),	
   string_dumped_(false),
-  isMC_(iConfig.getParameter<bool>("isMC"))
+  isMC_(iConfig.getParameter<bool>("isMC")),
+	hasLhe_(iConfig.getParameter<bool>("hasLHE"))
 {
   useWeighted_ = true;
   triedWeighted_ = false;
@@ -126,11 +127,11 @@ void MetaNtuplizer::beginJob()
 void MetaNtuplizer::analyze(const edm::Event& iEvent, const edm::EventSetup&)
 {
 	processed_++;
-	edm::Handle<LHEEventProduct> lheinfo;
-	iEvent.getByToken(weights_srcToken_, lheinfo);
 	double weight = 1.;
-	if(lheinfo.isValid() && lheinfo->weights().size() > 0)
+	if(hasLhe_) //lheinfo.isValid() && lheinfo->weights().size() > 0)
 	{
+		edm::Handle<LHEEventProduct> lheinfo;
+		iEvent.getByToken(weights_srcToken_, lheinfo);
 		weight = lheinfo->weights()[0].wgt;
 		//std::cout << weight << std::endl;
 	}

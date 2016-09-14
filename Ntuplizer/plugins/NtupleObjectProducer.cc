@@ -47,6 +47,7 @@ private:
 
   edm::InputTag src_;
   edm::EDGetTokenT<EDObject> srcToken_;
+	bool active_;
   std::vector< ObjExpression<EDObject>* > branches_;
 };
 
@@ -54,39 +55,40 @@ template <class EDObject>
 NtupleObjectProducer<EDObject>::NtupleObjectProducer(edm::ParameterSet cfg):
   Obj2BranchBase(cfg),
   src_(cfg.getParameter<edm::InputTag>("src")),
-  srcToken_(consumes<EDObject>(src_))
+  srcToken_(consumes<EDObject>(src_)),
+	active_(cfg.existsAs<bool>("active") ? cfg.getParameter<bool>("active") : true)
 {
   std::vector< edm::ParameterSet > branches = cfg.getParameter<std::vector< edm::ParameterSet > >("branches");
   branches_.reserve(branches.size());
   for(auto&& branch : branches)
-    {
-      BranchInfo info(prefix_, branch);
-      try
 	{
-	  branches_.push_back(ObjBranchExprFactory<EDObject>(info, tree_));
+		BranchInfo info(prefix_, branch);
+		try
+		{
+			branches_.push_back(ObjBranchExprFactory<EDObject>(info, tree_));
+		}
+		catch(cms::Exception& iException)
+		{
+			iException << "Caught exception in building branch: "
+								 << info.name << " with formula: " << info.expr;
+			throw;
+		}
 	}
-      catch(cms::Exception& iException)
-	{
-	  iException << "Caught exception in building branch: "
-		     << info.name << " with formula: " << info.expr;
-	  throw;
-	}
-    }
 }
 
 template <class EDObject>
 void NtupleObjectProducer<EDObject>::analyze(const edm::Event& evt, const edm::EventSetup&)
 {
   //
+  if(!active_) return;
+
   edm::Handle< EDObject > handle;
   evt.getByToken(srcToken_, handle);
 
-  if(!handle.isValid()) return;
-
   for(auto&& branch : branches_)
-    {
-      branch->fill(*handle);
-    }
+	{
+		branch->fill(*handle);
+	}
   //std::cout << "filled branches" << std::endl;
 }
 

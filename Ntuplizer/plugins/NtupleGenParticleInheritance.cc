@@ -51,7 +51,8 @@ private:
   bool isMC_;
   edm::InputTag src_;
   edm::EDGetTokenT<reco::CandidateView> srcToken_;
-   
+	bool active_;
+	
   std::vector<int> index;     // Basically what is the position of this particle in the collection
   std::vector< std::vector<int> > mom_index; // The mother's position in the same collection
   // It turns out we can have two mothers or more, so we need to make this a vector of vectors 
@@ -63,7 +64,8 @@ private:
 NtupleGenParticleInheritance::NtupleGenParticleInheritance(edm::ParameterSet iConfig): 
 	Obj2BranchBase(iConfig),
 	src_(iConfig.getParameter<edm::InputTag>("src")),
-        srcToken_(consumes<reco::CandidateView>(src_))	
+	srcToken_(consumes<reco::CandidateView>(src_)),
+	active_(iConfig.getParameter<bool>("active"))
 {
   // By having this class inherit from Obj2BranchBAse, we have access to our tree_, no need for TFileService
   // Book branches:
@@ -84,9 +86,10 @@ NtupleGenParticleInheritance::analyze(const edm::Event& iEvent, const edm::Event
   //before all, clear the vectors for this event:
   clear();
   
+	if(!active_) return;
+
   edm::Handle<reco::CandidateView> GenParticles;
   iEvent.getByToken(srcToken_, GenParticles);
-	if(!GenParticles.isValid()) return;
   
   // We need to make a first pass to be able to find the mothers later:
   std::vector<const reco::Candidate *> cands;

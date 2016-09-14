@@ -72,7 +72,7 @@ WeightedEventCountProducer::produce(edm::Event& iEvent, const edm::EventSetup& i
 	edm::Handle<LHEEventProduct > lhes;
 	//iEvent.getByLabel(lhes_, lhes);
 	iEvent.getByToken(lhesToken_, lhes);
-	if(computeWeighted_ && lhes.isValid())
+	if(computeWeighted_)
 	{
 		float w = lhes->hepeup().XWGTUP;
 		short sign = (w > 0) ? 1 : ((w < 0) ? -1 : 0);

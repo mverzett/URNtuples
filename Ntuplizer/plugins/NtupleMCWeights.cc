@@ -50,6 +50,7 @@ private:
   bool isMC_;
   edm::InputTag src_;
   edm::EDGetTokenT<LHEEventProduct> srcToken_;
+	bool active_;
    
   std::vector<float> weights;
   int npnlo;
@@ -60,7 +61,8 @@ private:
 NtupleMCWeights::NtupleMCWeights(edm::ParameterSet iConfig): 
 	Obj2BranchBase(iConfig),
 	src_(iConfig.getParameter<edm::InputTag>("src")),
-	srcToken_(consumes<LHEEventProduct>(src_))
+	srcToken_(consumes<LHEEventProduct>(src_)),
+	active_(iConfig.getParameter<bool>("active"))
 	//weights(1)
 {
 	std::cout << "NtupleMCWeights::NtupleMCWeights" << std::endl;
@@ -82,7 +84,8 @@ void NtupleMCWeights::analyze(const edm::Event& iEvent, const edm::EventSetup& i
 
 	edm::Handle<LHEEventProduct> lheinfo;
 	iEvent.getByToken(srcToken_, lheinfo);	
-	
+	if(!active_) return;
+
 	for(size_t w = 0 ; w < lheinfo->weights().size() ; ++w)
 	{
 		//weights[0].push_back(lheinfo->weights()[w].wgt);
