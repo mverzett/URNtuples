@@ -92,6 +92,7 @@ process.load("Configuration.StandardSequences.Services_cff")
 process.load('URNtuples.Ntuplizer.MetaNtuplize_cfi')
 process.metaTree.isMC = cms.bool(options.isMC)
 process.metaTree.hasLHE = cms.bool(options.computeWeighted and options.isMC)
+process.metaTree.weightsSrc = collections.get('MCWeigths', 'externalLHEProducer')
 process.meta = cms.Sequence(
    meta.embed_meta(process, options.isMC, options.computeWeighted and options.isMC) *
    process.metaTree
