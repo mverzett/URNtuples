@@ -93,10 +93,10 @@ jobs = []
 #JEC external files
 externals = []
 if args.externals:
-	paths = externals.split()
+	paths = args.externals.split()
 	for i in paths:
-		externals.exted(glob(i))
-	if len(externals):
+		externals.extend(glob(i))
+	if not len(externals):
 		raise RuntimeError('You provided external files but I could not find any!')
 externals = [os.path.join(os.environ['CMSSW_BASE'],'src',i) for i in externals]
 
