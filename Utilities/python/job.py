@@ -79,9 +79,9 @@ config.Site.storageSite = {STORAGE!r}
 		if self.njobs:
 			config += 'config.Data.Data.totalUnits = {}\n'.format(self.njobs)
 		if self.externals:
-			config += 'config.JobType.inputFiles = {0!r}'.format(self.externals)
+			config += 'config.JobType.inputFiles = {0!r}\n'.format(self.externals)
 		if self.dbsinst is not None:
-			config += 'config.Data.inputDBS = {0!r}'.format(self.dbsinst) #phys03'
+			config += 'config.Data.inputDBS = {0!r}\n'.format(self.dbsinst) #phys03'
 		
 		crab_cfg_name = 'crab_%s_%s_cfg.py' % (self.id, self.name)
 		with open(os.path.join(subdir, crab_cfg_name), 'w') as cfg:
