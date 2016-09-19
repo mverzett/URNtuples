@@ -13,26 +13,3 @@ def add_jets(process, collection, opts):
 		)
 	return process.customJets, 'urSkimmedJets'
 	
-	process.urSmearedSkimmedJetsJERM = process.urSmearedSkimmedJets.clone(
-		shiftBy = cms.double(-1.0),
-		areSrcJetsSmeared = cms.bool(False)
-		)
-	process.customJets *= process.urSmearedSkimmedJetsJERM
-	
-	process.embeddedURJets = cms.EDProducer(
-		'PATJetsEmbedder',
-		src = cms.InputTag('urSkimmedJets'),
-		trigMatches = cms.VInputTag(),
-		trigPaths = cms.vstring(),
-		floatMaps = cms.PSet(),
-		shiftNames = cms.vstring('JES+', 'JES-', 'JER+', 'JER-', 'JER'),
-		shiftedCollections = cms.VInputTag(
-			cms.InputTag('urSkimmedJetsJESP'),
-			cms.InputTag('urSkimmedJetsJESM'),
-			cms.InputTag('urSmearedSkimmedJetsJERP'),
-			cms.InputTag('urSmearedSkimmedJetsJERM'),
-			cms.InputTag('urSmearedSkimmedJets'),
-			),
-		)
-	process.customJets *= process.embeddedURJets
-	return process.customJets, 'embeddedURJets'

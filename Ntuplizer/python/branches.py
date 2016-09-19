@@ -144,6 +144,9 @@ jet_specific = [
    make_branch_pset('area', 'jetArea'),
    make_branch_pset('mass', 'p4().mass()'),
 
+	 #QG Tagger
+	 make_branch_pset('qgTag', 'userFloat("qgtag")'),
+
 	 #JES uncertainty values
 	 make_branch_pset('JESUnc', '? hasUserCand("JES+") ? userCand("JES+").pt()/pt() -1 : 0'),
 	 make_branch_pset('JER', '? hasUserCand("JER") ? userCand("JER").pt()/pt() : 0'),

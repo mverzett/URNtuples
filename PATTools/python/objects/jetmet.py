@@ -117,78 +117,102 @@ def rerun_JECJER(process, opts, collections):
 		)
 	process.newJECJER *= process.slimmedMETsNewJEC
 	collections['METs'] = 'slimmedMETsNewJEC'
-	if not opts.isMC:
-		return collections, 'newJECJER'
-	
-	
-	#### Second, smear newly corrected jets	
-	process.slimmedJetsSmeared = cms.EDProducer(
-		'SmearedPATJetProducer',
-		src = cms.InputTag('slimmedJetsNewJEC'),
-		enabled = cms.bool(True),
-		rho = cms.InputTag("fixedGridRhoFastjetAll"),
-		# Read from GT
-    algopt = cms.string('AK4PFchs_pt'),
-    algo = cms.string('AK4PFchs'),
-		#or from txt file (DEPRECATED!)
-		#resolutionFile  = cms.FileInPath('URNtuples/PATTools/data/Fall15_25nsV2_MC_PtResolution_AK4PFchs.txt'),
-		#scaleFactorFile = cms.FileInPath('URNtuples/PATTools/data/Fall15_25nsV2_MC_SF_AK4PFchs.txt'),
-		
-		genJets = cms.InputTag('slimmedGenJets'),
-		dRMax = cms.double(0.2),
-		dPtMaxFactor = cms.double(3),
-		
-		variation = cms.int32(0),
-		debug = cms.untracked.bool(False)
-		)
-	process.newJECJER *= process.slimmedJetsSmeared
-	
-	METSmeared = shift_MET(process, process.newJECJER, 'Smeared', 'slimmedJetsSmeared')
 
-	#
-	# Compute shifts
-	#
-	# JES
-	process.slimmedJetsNewJECJESUp = cms.EDProducer(
-		"ShiftedPATJetProducer",
-		addResidualJES = cms.bool(True),
-		jetCorrLabelUpToL3 = cms.InputTag("ak4PFCHSL1FastL2L3Corrector"),
-		jetCorrLabelUpToL3Res = cms.InputTag("ak4PFCHSL1FastL2L3ResidualCorrector"),
-		jetCorrPayloadName = cms.string('AK4PFchs'),
-		jetCorrUncertaintyTag = cms.string('Uncertainty'),
-		shiftBy = cms.double(1.0),
-		src = cms.InputTag(collections['jets'])
-		)
-	process.newJECJER *= process.slimmedJetsNewJECJESUp
-	METJESP = shift_MET(process, process.newJECJER, 'JESUp', 'slimmedJetsNewJECJESUp')
-	
-	process.slimmedJetsNewJECJESDown = process.slimmedJetsNewJECJESUp.clone(shiftBy = cms.double(-1.0))
-	process.newJECJER *= process.slimmedJetsNewJECJESDown
-	METJESM = shift_MET(process, process.newJECJER, 'JESDown', 'slimmedJetsNewJECJESDown')
-	
-	# JER
-	process.slimmedJetsSmearedJERUp = process.slimmedJetsSmeared.clone(variation = cms.int32(1))
-	process.newJECJER *= process.slimmedJetsSmearedJERUp
-	METJERP = shift_MET(process, process.newJECJER, 'JERUp', 'slimmedJetsSmearedJERUp')
+	if opts.isMC:
+	  #### Second, smear newly corrected jets	
+		process.slimmedJetsSmeared = cms.EDProducer(
+			'SmearedPATJetProducer',
+			src = cms.InputTag('slimmedJetsNewJEC'),
+			enabled = cms.bool(True),
+			rho = cms.InputTag("fixedGridRhoFastjetAll"),
+			# Read from GT
+			algopt = cms.string('AK4PFchs_pt'),
+			algo = cms.string('AK4PFchs'),
+			#or from txt file (DEPRECATED!)
+			#resolutionFile  = cms.FileInPath('URNtuples/PATTools/data/Fall15_25nsV2_MC_PtResolution_AK4PFchs.txt'),
+			#scaleFactorFile = cms.FileInPath('URNtuples/PATTools/data/Fall15_25nsV2_MC_SF_AK4PFchs.txt'),
+			
+			genJets = cms.InputTag('slimmedGenJets'),
+			dRMax = cms.double(0.2),
+			dPtMaxFactor = cms.double(3),
+			
+			variation = cms.int32(0),
+			debug = cms.untracked.bool(False)
+			)
+		process.newJECJER *= process.slimmedJetsSmeared
 
-	process.slimmedJetsSmearedJERDown = process.slimmedJetsSmeared.clone(variation = cms.int32(-1))
-	process.newJECJER *= process.slimmedJetsSmearedJERDown
-	METJERM = shift_MET(process, process.newJECJER, 'JERDown', 'slimmedJetsSmearedJERDown')
+		METSmeared = shift_MET(process, process.newJECJER, 'Smeared', 'slimmedJetsSmeared')
+
+		#
+		# Compute shifts
+		#
+		# JES
+		process.slimmedJetsNewJECJESUp = cms.EDProducer(
+			"ShiftedPATJetProducer",
+			addResidualJES = cms.bool(True),
+			jetCorrLabelUpToL3 = cms.InputTag("ak4PFCHSL1FastL2L3Corrector"),
+			jetCorrLabelUpToL3Res = cms.InputTag("ak4PFCHSL1FastL2L3ResidualCorrector"),
+			jetCorrPayloadName = cms.string('AK4PFchs'),
+			jetCorrUncertaintyTag = cms.string('Uncertainty'),
+			shiftBy = cms.double(1.0),
+			src = cms.InputTag(collections['jets'])
+			)
+		process.newJECJER *= process.slimmedJetsNewJECJESUp
+		METJESP = shift_MET(process, process.newJECJER, 'JESUp', 'slimmedJetsNewJECJESUp')
+		
+		process.slimmedJetsNewJECJESDown = process.slimmedJetsNewJECJESUp.clone(shiftBy = cms.double(-1.0))
+		process.newJECJER *= process.slimmedJetsNewJECJESDown
+		METJESM = shift_MET(process, process.newJECJER, 'JESDown', 'slimmedJetsNewJECJESDown')
+		
+		# JER
+		process.slimmedJetsSmearedJERUp = process.slimmedJetsSmeared.clone(variation = cms.int32(1))
+		process.newJECJER *= process.slimmedJetsSmearedJERUp
+		METJERP = shift_MET(process, process.newJECJER, 'JERUp', 'slimmedJetsSmearedJERUp')
+		
+		process.slimmedJetsSmearedJERDown = process.slimmedJetsSmeared.clone(variation = cms.int32(-1))
+		process.newJECJER *= process.slimmedJetsSmearedJERDown
+		METJERM = shift_MET(process, process.newJECJER, 'JERDown', 'slimmedJetsSmearedJERDown')
+
+	#common to data and MC
+	# QGTagger
+	qgDatabaseVersion = '80X' # check https://twiki.cern.ch/twiki/bin/viewauth/CMS/QGDataBaseVersion
+	from CondCore.DBCommon.CondDBSetup_cfi import CondDBSetup
+	process.QGPoolDBESSource = cms.ESSource(
+		"PoolDBESSource",
+		CondDBSetup,
+		toGet = cms.VPSet(),
+		connect = cms.string('sqlite:QGL_80X.db'),
+		)
+	process.es_prefer_qgtagger = cms.ESPrefer("PoolDBESSource","QGPoolDBESSource")
 	
+	for jet_type in ['AK4PFchs','AK4PFchs_antib']:
+		process.QGPoolDBESSource.toGet.extend(cms.VPSet(cms.PSet(
+					record = cms.string('QGLikelihoodRcd'),
+					tag    = cms.string('QGLikelihoodObject_'+qgDatabaseVersion+'_'+jet_type),
+					label  = cms.untracked.string('QGL_'+jet_type)
+					)))
+	process.load('RecoJets.JetProducers.QGTagger_cfi')
+	process.QGTagger.srcJets          = cms.InputTag(collections['jets'])
+	process.QGTagger.jetsLabel        = cms.string('QGL_AK4PFchs')  
+	process.newJECJER *= process.QGTagger
+
+	# Embed everything! (insert meme here)
 	process.jetsNewJECAllEmbedded = cms.EDProducer(
 		'PATJetsEmbedder',
 		src = cms.InputTag(collections['jets']),
 		trigMatches = cms.VInputTag(),
 		trigPaths = cms.vstring(),
-		floatMaps = cms.PSet(),
-		shiftNames = cms.vstring('JES+', 'JES-', 'JER', 'JER+', 'JER-'),
+		floatMaps = cms.PSet(
+			qgtag = cms.InputTag("QGTagger:qgLikelihood"),
+			),
+		shiftNames = cms.vstring('JES+', 'JES-', 'JER', 'JER+', 'JER-') if opts.isMC else cms.vstring(),
 		shiftedCollections = cms.VInputTag(
 			cms.InputTag('slimmedJetsNewJECJESUp'),
 			cms.InputTag('slimmedJetsNewJECJESDown'),
 			cms.InputTag('slimmedJetsSmeared'),
 			cms.InputTag('slimmedJetsSmearedJERUp'),
 			cms.InputTag('slimmedJetsSmearedJERDown'),
-			),
+			) if opts.isMC else cms.VInputTag(),
 		)
 	collections['jets'] = 'jetsNewJECAllEmbedded'
 	process.newJECJER *= process.jetsNewJECAllEmbedded
@@ -199,7 +223,7 @@ def rerun_JECJER(process, opts, collections):
 		trigMatches = cms.VInputTag(),
 		trigPaths = cms.vstring(),
 		floatMaps = cms.PSet(),
-		shiftNames = cms.vstring('ORIGINAL', 'JES+', 'JES-', 'JER', 'JER+', 'JER-'),
+		shiftNames = cms.vstring('ORIGINAL', 'JES+', 'JES-', 'JER', 'JER+', 'JER-') if opts.isMC else cms.vstring(),
 		shiftedCollections = cms.VInputTag(
 			cms.InputTag(originalMET),
 			cms.InputTag(METJESP),
@@ -207,7 +231,7 @@ def rerun_JECJER(process, opts, collections):
 			cms.InputTag(METSmeared),
 			cms.InputTag(METJERP),
 			cms.InputTag(METJERM),
-			),
+			) if opts.isMC else cms.VInputTag(),
 		)
 	collections['METs'] = 'METsNewJECAllEmbedded'
 	process.newJECJER *= process.jetsNewJECAllEmbedded
