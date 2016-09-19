@@ -2,7 +2,7 @@ import FWCore.ParameterSet.Config as cms
 import URNtuples.Utilities.version as version
 import time
 
-def embed_meta(process, isMC, computeWeighted):
+def embed_meta(process, isMC, computeWeighted, lheInstance):
     process.storeMeta = cms.Sequence()
     # Hack meta information about this PAT tuple in the provenance.
     global_tag = process.GlobalTag.globaltag \
@@ -23,8 +23,8 @@ def embed_meta(process, isMC, computeWeighted):
 
     process.weightedProcessedEvents = cms.EDProducer(
         'WeightedEventCountProducer',
-        lhes = cms.InputTag('externalLHEProducer', '', 'LHE'),
-        computeWeighted = cms.bool(computeWeighted)
+        lhes = cms.InputTag(lheInstance),
+        computeWeighted = cms.bool(computeWeighted),
         )
     process.storeMeta += process.weightedProcessedEvents
 
@@ -39,7 +39,7 @@ def embed_meta(process, isMC, computeWeighted):
                 max   = cms.double(100),
                 ),
             src = cms.InputTag('slimmedAddPileupInfo'),
-            weightsSrc = cms.InputTag('externalLHEProducer'),
+            weightsSrc = cms.InputTag(lheInstance),
             )
         process.storeMeta += process.storePU
         
