@@ -130,6 +130,7 @@
 		"options": {
 			"isMC": true,
 			"runJEC": true,
+			"computeWeighted": false,
 			"skims": "muPlus3Jets,elPlus3Jets",
 			"globalTag": "80X_mcRun2_asymptotic_2016_miniAODv2_v1"
 		},
@@ -141,6 +142,7 @@
 		"options": {
 			"isMC": true,
 			"runJEC": true,
+			"computeWeighted": false,
 			"skims": "muPlus3Jets,elPlus3Jets",
 			"globalTag": "80X_mcRun2_asymptotic_2016_miniAODv2_v1"
 		},
@@ -167,6 +169,7 @@
 			"reHLT" : true,
 			"isMC": true,
 			"runJEC": true,
+			"computeWeighted": false,
 			"skims": "muPlus3Jets,elPlus3Jets",
 			"globalTag": "80X_mcRun2_asymptotic_2016_miniAODv2_v1"
 		},
@@ -180,6 +183,7 @@
 			"reHLT" : true,
 			"isMC": true,
 			"runJEC": true,
+			"computeWeighted": false,
 			"skims": "muPlus3Jets,elPlus3Jets",
 			"globalTag": "80X_mcRun2_asymptotic_2016_miniAODv2_v1"
 		},
@@ -198,6 +202,7 @@
 			"isMC": true,
 			"runJEC": true,
 			"skims": "muPlus3Jets,elPlus3Jets",
+			"computeWeighted": false,
 			"globalTag": "80X_mcRun2_asymptotic_2016_miniAODv2_v1"
 		},
 		"name": "WW",
@@ -210,6 +215,7 @@
 			"isMC": true,
 			"runJEC": true,
 			"skims": "muPlus3Jets,elPlus3Jets",
+			"computeWeighted": false,
 			"globalTag": "80X_mcRun2_asymptotic_2016_miniAODv2_v1"
 		},
 		"name": "WZ",
@@ -221,6 +227,7 @@
 			"storeLHEWeights" : false,
 			"isMC": true,
 			"runJEC": true,
+			"computeWeighted": false,
 			"skims": "muPlus3Jets,elPlus3Jets",
 			"globalTag": "80X_mcRun2_asymptotic_2016_miniAODv2_v1"
 		},
