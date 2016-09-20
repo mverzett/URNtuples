@@ -169,7 +169,7 @@
 			"reHLT" : true,
 			"isMC": true,
 			"runJEC": true,
-			"computeWeighted": false,
+			"computeWeighted": true,
 			"skims": "muPlus3Jets,elPlus3Jets",
 			"globalTag": "80X_mcRun2_asymptotic_2016_miniAODv2_v1"
 		},
@@ -183,7 +183,7 @@
 			"reHLT" : true,
 			"isMC": true,
 			"runJEC": true,
-			"computeWeighted": false,
+			"computeWeighted": true,
 			"skims": "muPlus3Jets,elPlus3Jets",
 			"globalTag": "80X_mcRun2_asymptotic_2016_miniAODv2_v1"
 		},
@@ -551,6 +551,7 @@
 			"LHEInstance" : "source",
 			"FilterLHEID" : 1,
 			"isMC": true,
+			"computeWeighted": true,
 			"storeLHEParticles": true,
 			"skims": "muPlus3Jets,elPlus3Jets",
 			"globalTag": "80X_mcRun2_asymptotic_2016_miniAODv2_v1",
@@ -566,6 +567,7 @@
 			"LHEInstance" : "source",
 			"FilterLHEID" : 2,
 			"isMC": true,
+			"computeWeighted": true,
 			"storeLHEParticles": true,
 			"skims": "muPlus3Jets,elPlus3Jets",
 			"globalTag": "80X_mcRun2_asymptotic_2016_miniAODv2_v1",
@@ -581,6 +583,7 @@
 			"LHEInstance" : "source",
 			"FilterLHEID" : 3,
 			"isMC": true,
+			"computeWeighted": true,
 			"storeLHEParticles": true,
 			"skims": "muPlus3Jets,elPlus3Jets",
 			"globalTag": "80X_mcRun2_asymptotic_2016_miniAODv2_v1",
@@ -596,6 +599,7 @@
 			"LHEInstance" : "source",
 			"FilterLHEID" : 4,
 			"isMC": true,
+			"computeWeighted": true,
 			"storeLHEParticles": true,
 			"skims": "muPlus3Jets,elPlus3Jets",
 			"globalTag": "80X_mcRun2_asymptotic_2016_miniAODv2_v1",
@@ -611,6 +615,7 @@
 			"LHEInstance" : "source",
 			"FilterLHEID" : 5,
 			"isMC": true,
+			"computeWeighted": true,
 			"storeLHEParticles": true,
 			"skims": "muPlus3Jets,elPlus3Jets",
 			"globalTag": "80X_mcRun2_asymptotic_2016_miniAODv2_v1",
@@ -626,6 +631,7 @@
 			"LHEInstance" : "source",
 			"FilterLHEID" : 6,
 			"isMC": true,
+			"computeWeighted": true,
 			"storeLHEParticles": true,
 			"skims": "muPlus3Jets,elPlus3Jets",
 			"globalTag": "80X_mcRun2_asymptotic_2016_miniAODv2_v1",
@@ -641,6 +647,7 @@
 			"LHEInstance" : "source",
 			"FilterLHEID" : 7,
 			"isMC": true,
+			"computeWeighted": true,
 			"storeLHEParticles": true,
 			"skims": "muPlus3Jets,elPlus3Jets",
 			"globalTag": "80X_mcRun2_asymptotic_2016_miniAODv2_v1",
@@ -656,6 +663,7 @@
 			"LHEInstance" : "source",
 			"FilterLHEID" : 8,
 			"isMC": true,
+			"computeWeighted": true,
 			"storeLHEParticles": true,
 			"skims": "muPlus3Jets,elPlus3Jets",
 			"globalTag": "80X_mcRun2_asymptotic_2016_miniAODv2_v1",
@@ -671,6 +679,7 @@
 		"DBSName": "/HToTT-semilep_pseudoscalar-M500-portmanteau_13TeV-madgraph-pythia8/aapopov-MiniAOD-b773ac922eef67f3b5600ed596c9ce54/USER",
 		"options": {
 			"LHEInstance" : "source",
+			"computeWeighted": true,
 			"FilterLHEID" : 1,
 			"isMC": true,
 			"storeLHEParticles": true,
@@ -686,6 +695,7 @@
 		"DBSName": "/HToTT-semilep_pseudoscalar-M500-portmanteau_13TeV-madgraph-pythia8/aapopov-MiniAOD-b773ac922eef67f3b5600ed596c9ce54/USER",
 		"options": {
 			"LHEInstance" : "source",
+			"computeWeighted": true,
 			"FilterLHEID" : 2,
 			"isMC": true,
 			"storeLHEParticles": true,
@@ -701,6 +711,7 @@
 		"DBSName": "/HToTT-semilep_pseudoscalar-M500-portmanteau_13TeV-madgraph-pythia8/aapopov-MiniAOD-b773ac922eef67f3b5600ed596c9ce54/USER",
 		"options": {
 			"LHEInstance" : "source",
+			"computeWeighted": true,
 			"FilterLHEID" : 3,
 			"isMC": true,
 			"storeLHEParticles": true,
@@ -716,6 +727,7 @@
 		"DBSName": "/HToTT-semilep_pseudoscalar-M500-portmanteau_13TeV-madgraph-pythia8/aapopov-MiniAOD-b773ac922eef67f3b5600ed596c9ce54/USER",
 		"options": {
 			"LHEInstance" : "source",
+			"computeWeighted": true,
 			"FilterLHEID" : 4,
 			"isMC": true,
 			"storeLHEParticles": true,
@@ -731,6 +743,7 @@
 		"DBSName": "/HToTT-semilep_pseudoscalar-M500-portmanteau_13TeV-madgraph-pythia8/aapopov-MiniAOD-b773ac922eef67f3b5600ed596c9ce54/USER",
 		"options": {
 			"LHEInstance" : "source",
+			"computeWeighted": true,
 			"FilterLHEID" : 5,
 			"isMC": true,
 			"storeLHEParticles": true,
@@ -746,6 +759,7 @@
 		"DBSName": "/HToTT-semilep_pseudoscalar-M500-portmanteau_13TeV-madgraph-pythia8/aapopov-MiniAOD-b773ac922eef67f3b5600ed596c9ce54/USER",
 		"options": {
 			"LHEInstance" : "source",
+			"computeWeighted": true,
 			"FilterLHEID" : 6,
 			"isMC": true,
 			"storeLHEParticles": true,
@@ -761,6 +775,7 @@
 		"DBSName": "/HToTT-semilep_pseudoscalar-M500-portmanteau_13TeV-madgraph-pythia8/aapopov-MiniAOD-b773ac922eef67f3b5600ed596c9ce54/USER",
 		"options": {
 			"LHEInstance" : "source",
+			"computeWeighted": true,
 			"FilterLHEID" : 7,
 			"isMC": true,
 			"storeLHEParticles": true,
@@ -776,6 +791,7 @@
 		"DBSName": "/HToTT-semilep_pseudoscalar-M500-portmanteau_13TeV-madgraph-pythia8/aapopov-MiniAOD-b773ac922eef67f3b5600ed596c9ce54/USER",
 		"options": {
 			"LHEInstance" : "source",
+			"computeWeighted": true,
 			"FilterLHEID" : 8,
 			"isMC": true,
 			"storeLHEParticles": true,
@@ -793,6 +809,7 @@
 		"DBSName": "/HToTT-semilep_pseudoscalar-M600-portmanteau_13TeV-madgraph-pythia8/aapopov-MiniAOD-b773ac922eef67f3b5600ed596c9ce54/USER",
 		"options": {
 			"LHEInstance" : "source",
+			"computeWeighted": true,
 			"FilterLHEID" : 1,
 			"isMC": true,
 			"storeLHEParticles": true,
@@ -808,6 +825,7 @@
 		"DBSName": "/HToTT-semilep_pseudoscalar-M600-portmanteau_13TeV-madgraph-pythia8/aapopov-MiniAOD-b773ac922eef67f3b5600ed596c9ce54/USER",
 		"options": {
 			"LHEInstance" : "source",
+			"computeWeighted": true,
 			"FilterLHEID" : 2,
 			"isMC": true,
 			"storeLHEParticles": true,
@@ -823,6 +841,7 @@
 		"DBSName": "/HToTT-semilep_pseudoscalar-M600-portmanteau_13TeV-madgraph-pythia8/aapopov-MiniAOD-b773ac922eef67f3b5600ed596c9ce54/USER",
 		"options": {
 			"LHEInstance" : "source",
+			"computeWeighted": true,
 			"FilterLHEID" : 3,
 			"isMC": true,
 			"storeLHEParticles": true,
@@ -838,6 +857,7 @@
 		"DBSName": "/HToTT-semilep_pseudoscalar-M600-portmanteau_13TeV-madgraph-pythia8/aapopov-MiniAOD-b773ac922eef67f3b5600ed596c9ce54/USER",
 		"options": {
 			"LHEInstance" : "source",
+			"computeWeighted": true,
 			"FilterLHEID" : 4,
 			"isMC": true,
 			"storeLHEParticles": true,
@@ -853,6 +873,7 @@
 		"DBSName": "/HToTT-semilep_pseudoscalar-M600-portmanteau_13TeV-madgraph-pythia8/aapopov-MiniAOD-b773ac922eef67f3b5600ed596c9ce54/USER",
 		"options": {
 			"LHEInstance" : "source",
+			"computeWeighted": true,
 			"FilterLHEID" : 5,
 			"isMC": true,
 			"storeLHEParticles": true,
@@ -868,6 +889,7 @@
 		"DBSName": "/HToTT-semilep_pseudoscalar-M600-portmanteau_13TeV-madgraph-pythia8/aapopov-MiniAOD-b773ac922eef67f3b5600ed596c9ce54/USER",
 		"options": {
 			"LHEInstance" : "source",
+			"computeWeighted": true,
 			"FilterLHEID" : 6,
 			"isMC": true,
 			"storeLHEParticles": true,
@@ -883,6 +905,7 @@
 		"DBSName": "/HToTT-semilep_pseudoscalar-M600-portmanteau_13TeV-madgraph-pythia8/aapopov-MiniAOD-b773ac922eef67f3b5600ed596c9ce54/USER",
 		"options": {
 			"LHEInstance" : "source",
+			"computeWeighted": true,
 			"FilterLHEID" : 7,
 			"isMC": true,
 			"storeLHEParticles": true,
@@ -898,6 +921,7 @@
 		"DBSName": "/HToTT-semilep_pseudoscalar-M600-portmanteau_13TeV-madgraph-pythia8/aapopov-MiniAOD-b773ac922eef67f3b5600ed596c9ce54/USER",
 		"options": {
 			"LHEInstance" : "source",
+			"computeWeighted": true,
 			"FilterLHEID" : 8,
 			"isMC": true,
 			"storeLHEParticles": true,
@@ -914,6 +938,7 @@
 		"DBSName": "/HToTT-semilep_pseudoscalar-M750-portmanteau_13TeV-madgraph-pythia8/aapopov-MiniAOD-b773ac922eef67f3b5600ed596c9ce54/USER",
 		"options": {
 			"LHEInstance" : "source",
+			"computeWeighted": true,
 			"FilterLHEID" : 1,
 			"isMC": true,
 			"storeLHEParticles": true,
@@ -929,6 +954,7 @@
 		"DBSName": "/HToTT-semilep_pseudoscalar-M750-portmanteau_13TeV-madgraph-pythia8/aapopov-MiniAOD-b773ac922eef67f3b5600ed596c9ce54/USER",
 		"options": {
 			"LHEInstance" : "source",
+			"computeWeighted": true,
 			"FilterLHEID" : 2,
 			"isMC": true,
 			"storeLHEParticles": true,
@@ -944,6 +970,7 @@
 		"DBSName": "/HToTT-semilep_pseudoscalar-M750-portmanteau_13TeV-madgraph-pythia8/aapopov-MiniAOD-b773ac922eef67f3b5600ed596c9ce54/USER",
 		"options": {
 			"LHEInstance" : "source",
+			"computeWeighted": true,
 			"FilterLHEID" : 3,
 			"isMC": true,
 			"storeLHEParticles": true,
@@ -959,6 +986,7 @@
 		"DBSName": "/HToTT-semilep_pseudoscalar-M750-portmanteau_13TeV-madgraph-pythia8/aapopov-MiniAOD-b773ac922eef67f3b5600ed596c9ce54/USER",
 		"options": {
 			"LHEInstance" : "source",
+			"computeWeighted": true,
 			"FilterLHEID" : 4,
 			"isMC": true,
 			"storeLHEParticles": true,
@@ -974,6 +1002,7 @@
 		"DBSName": "/HToTT-semilep_pseudoscalar-M750-portmanteau_13TeV-madgraph-pythia8/aapopov-MiniAOD-b773ac922eef67f3b5600ed596c9ce54/USER",
 		"options": {
 			"LHEInstance" : "source",
+			"computeWeighted": true,
 			"FilterLHEID" : 5,
 			"isMC": true,
 			"storeLHEParticles": true,
@@ -990,6 +1019,7 @@
 		"options": {
 			"LHEInstance" : "source",
 			"FilterLHEID" : 6,
+			"computeWeighted": true,
 			"isMC": true,
 			"storeLHEParticles": true,
 			"skims": "muPlus3Jets,elPlus3Jets",
@@ -1004,6 +1034,7 @@
 		"DBSName": "/HToTT-semilep_pseudoscalar-M750-portmanteau_13TeV-madgraph-pythia8/aapopov-MiniAOD-b773ac922eef67f3b5600ed596c9ce54/USER",
 		"options": {
 			"LHEInstance" : "source",
+			"computeWeighted": true,
 			"FilterLHEID" : 7,
 			"isMC": true,
 			"storeLHEParticles": true,
@@ -1019,6 +1050,7 @@
 		"DBSName": "/HToTT-semilep_pseudoscalar-M750-portmanteau_13TeV-madgraph-pythia8/aapopov-MiniAOD-b773ac922eef67f3b5600ed596c9ce54/USER",
 		"options": {
 			"LHEInstance" : "source",
+			"computeWeighted": true,
 			"FilterLHEID" : 8,
 			"isMC": true,
 			"storeLHEParticles": true,

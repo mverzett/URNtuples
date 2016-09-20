@@ -131,10 +131,12 @@ void MetaNtuplizer::analyze(const edm::Event& iEvent, const edm::EventSetup&)
 	if(hasLhe_) //lheinfo.isValid() && lheinfo->weights().size() > 0)
 	{
 		edm::Handle<LHEEventProduct> lheinfo;
+		iEvent.getByToken(weights_srcToken_, lheinfo);
 		if(!lheinfo.isValid()) {
 			throw cms::Exception("RuntimeError") << "The Handle of LHEInfo I was trying to access is not valid!" << std::endl;
 		}
-		iEvent.getByToken(weights_srcToken_, lheinfo);
+		if(lheinfo->weights().size() == 0) 
+			throw cms::Exception("RuntimeError") << "The LHEInfo I got works but has not weights!" << std::endl;
 		weight = lheinfo->weights()[0].wgt;
 		//std::cout << weight << std::endl;
 	}
