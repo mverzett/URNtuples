@@ -41,7 +41,7 @@ class Job(object):
 		self.externals = externals
 		self.dbsinst = dbsinst
 
-	def save_as_crab(self, subdir=''):
+	def save_as_crab(self, subdir='', shortname=False):
 		isData = self.name.startswith('data')
 		config_template = '''from WMCore.Configuration import Configuration
 config = Configuration()
@@ -83,7 +83,7 @@ config.Site.storageSite = {STORAGE!r}
 		if self.dbsinst is not None:
 			config += 'config.Data.inputDBS = {0!r}\n'.format(self.dbsinst) #phys03'
 		
-		crab_cfg_name = 'crab_%s_%s_cfg.py' % (self.id, self.name)
+		crab_cfg_name = 'crab_%s_%s_cfg.py' % (self.id, self.name) if not shortname else '%s_cfg.py' % self.name
 		with open(os.path.join(subdir, crab_cfg_name), 'w') as cfg:
 			cfg.write(config)
 

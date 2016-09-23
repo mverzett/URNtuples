@@ -125,7 +125,7 @@ for sample in to_submit:
       )
 
 if args.crab == 3:
-   crab_cfgs = [job.save_as_crab(args.jobid) for job in jobs]
+   crab_cfgs = [job.save_as_crab(args.jobid, True) for job in jobs]
    print 'To submit run:'
    print 'cd %s' % args.jobid
    print '\n'.join('crab3 submit -c %s' % cfg for cfg in crab_cfgs)
