@@ -22,6 +22,7 @@
 #include "FWCore/Framework/interface/Frameworkfwd.h"
 #include "FWCore/Framework/interface/EDAnalyzer.h"
 #include "FWCore/Framework/interface/Event.h"
+#include "FWCore/Framework/interface/Run.h"
 #include "FWCore/Framework/interface/LuminosityBlock.h"
 #include "FWCore/ParameterSet/interface/ParameterSet.h"
 #include "DataFormats/Provenance/interface/Provenance.h"
@@ -43,6 +44,7 @@
 #include <sstream> 
 
 #include "SimDataFormats/GeneratorProducts/interface/LHEEventProduct.h"
+#include "SimDataFormats/GeneratorProducts/interface/LHERunInfoProduct.h"
 
 //
 // class declaration
@@ -61,12 +63,13 @@ private:
   virtual void analyze(const edm::Event&, const edm::EventSetup&) override;
   virtual void endJob() override;
 
-  virtual void endRun(edm::Run const&, edm::EventSetup const&) override {}
+  virtual void endRun(edm::Run const&, edm::EventSetup const&) override;
   virtual void endLuminosityBlock(edm::LuminosityBlock const&, edm::EventSetup const&) override;
 
   // ----------member data ---------------------------
   edm::InputTag weights_src_;
   edm::EDGetTokenT< LHEEventProduct > weights_srcToken_;
+  edm::EDGetTokenT< LHERunInfoProduct > header_token_;
 
   TTree *meta_tree_;
   std::map<std::string, std::string> to_json_;
@@ -93,6 +96,7 @@ private:
 MetaNtuplizer::MetaNtuplizer(const edm::ParameterSet& iConfig):
   weights_src_(iConfig.getParameter<edm::InputTag>("weightsSrc") ),
   weights_srcToken_(consumes<LHEEventProduct>(weights_src_)),	
+	header_token_(consumes<LHERunInfoProduct,edm::InRun>(weights_src_)),
   string_dumped_(false),
   isMC_(iConfig.getParameter<bool>("isMC")),
 	hasLhe_(iConfig.getParameter<bool>("hasLHE"))
@@ -124,6 +128,21 @@ void MetaNtuplizer::beginJob()
   meta_tree_->Branch("processedWeighted", &processedWeighted_);
 }
  
+void MetaNtuplizer::endRun(edm::Run const& run, edm::EventSetup const&) {
+	if(!hasLhe_ || to_json_.find("LHEHeader") != to_json_.end()) return;
+	edm::Handle<LHERunInfoProduct> lheinfo;
+	run.getByToken(header_token_, lheinfo);
+	
+	std::stringstream header;
+	for(auto iter=lheinfo->headers_begin(); iter!=lheinfo->headers_end(); ++iter){
+		header << iter->tag();
+		std::vector<std::string> lines = iter->lines();
+		for(auto& line : iter->lines())
+			header << line;
+	}
+	to_json_["LHEHeader"] = header.str();
+}
+
 void MetaNtuplizer::analyze(const edm::Event& iEvent, const edm::EventSetup&)
 {
 	processed_++;
