@@ -53,7 +53,7 @@ config.JobType.pluginName = 'Analysis'
 config.JobType.pyCfgParams = {PARS!r}
 config.section_('Data')
 config.Data.inputDataset = {DATASET!r}
-config.Data.unitsPerJob = 30
+config.Data.unitsPerJob = 10
 config.Data.outLFNDirBase = {OUTLNF!r}
 config.Data.splitting = {SPLITTING!r}
 config.section_('Site')
