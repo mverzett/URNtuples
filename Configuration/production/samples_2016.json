@@ -88,6 +88,52 @@
 
 
 
+	{
+		"DBSName": "/TTWJetsToLNu_TuneCUETP8M1_13TeV-amcatnloFXFX-madspin-pythia8/RunIISpring16MiniAODv2-premix_withHLT_80X_mcRun2_asymptotic_v14_ext1-v1/MINIAODSIM",
+		"options": {
+			"isMC": true,
+			"skims": "muPlus3Jets,elPlus3Jets",
+			"globalTag": "80X_mcRun2_asymptotic_2016_miniAODv2_v1",
+			"runJEC": true
+		},
+		"name": "ttWlnu",
+		"xsection": 0.2043
+	},
+	{
+		"DBSName": "/TTWJetsToQQ_TuneCUETP8M1_13TeV-amcatnloFXFX-madspin-pythia8/RunIISpring16MiniAODv2-PUSpring16_80X_mcRun2_asymptotic_2016_miniAODv2_v0-v1/MINIAODSIM",
+		"options": {
+			"isMC": true,
+			"skims": "muPlus3Jets,elPlus3Jets",
+			"globalTag": "80X_mcRun2_asymptotic_2016_miniAODv2_v1",
+			"runJEC": true
+		},
+		"name": "ttWqq",
+		"xsection": 0.4062
+	},
+	{
+		"DBSName": "/TTZToLLNuNu_M-10_TuneCUETP8M1_13TeV-amcatnlo-pythia8/RunIISpring16MiniAODv2-premix_withHLT_80X_mcRun2_asymptotic_v14_ext1-v1/MINIAODSIM",
+		"options": {
+			"isMC": true,
+			"skims": "muPlus3Jets,elPlus3Jets",
+			"globalTag": "80X_mcRun2_asymptotic_2016_miniAODv2_v1",
+			"runJEC": true
+		},
+		"name": "ttZll",
+		"xsection": 0.2529
+	},
+	{
+		"DBSName": "/TTZToQQ_TuneCUETP8M1_13TeV-amcatnlo-pythia8/RunIISpring16MiniAODv2-PUSpring16_80X_mcRun2_asymptotic_2016_miniAODv2_v0-v1/MINIAODSIM",
+		"options": {
+			"isMC": true,
+			"skims": "muPlus3Jets,elPlus3Jets",
+			"globalTag": "80X_mcRun2_asymptotic_2016_miniAODv2_v1",
+			"runJEC": true
+		},
+		"name": "ttZqq",
+		"xsection": 0.5297
+	},
+	
+
 
 	{
 		"DBSName": "/ST_t-channel_4f_leptonDecays_13TeV-amcatnlo-pythia8_TuneCUETP8M1/RunIISpring16MiniAODv2-premix_withHLT_80X_mcRun2_asymptotic_v14_ext1-v1/MINIAODSIM",
@@ -575,7 +621,7 @@
 		},
 		"name": "HtoTT_M400_5pc_Int",
 		"DBSInstance" : "phys03",
-		"xsection": 1.6083
+		"xsection": -1.6083
 	},
 	{
 		"DBSName": "/HToTT-semilep_pseudoscalar-M400-portmanteau_13TeV-madgraph-pythia8/aapopov-MiniAOD-b773ac922eef67f3b5600ed596c9ce54/USER",
@@ -607,7 +653,7 @@
 		},
 		"name": "HtoTT_M400_10pc_Int",
 		"DBSInstance" : "phys03",
-		"xsection": 1.5247
+		"xsection": -1.5247
 	},
 	{
 		"DBSName": "/HToTT-semilep_pseudoscalar-M400-portmanteau_13TeV-madgraph-pythia8/aapopov-MiniAOD-b773ac922eef67f3b5600ed596c9ce54/USER",
@@ -639,7 +685,7 @@
 		},
 		"name": "HtoTT_M400_25pc_Int",
 		"DBSInstance" : "phys03",
-		"xsection": 1.2426
+		"xsection": -1.2426
 	},
 	{
 		"DBSName": "/HToTT-semilep_pseudoscalar-M400-portmanteau_13TeV-madgraph-pythia8/aapopov-MiniAOD-b773ac922eef67f3b5600ed596c9ce54/USER",
@@ -671,7 +717,7 @@
 		},
 		"name": "HtoTT_M400_50pc_Int",
 		"DBSInstance" : "phys03",
-		"xsection": 0.9050
+		"xsection": -0.9050
 	},
 
 
@@ -705,7 +751,7 @@
 		},
 		"name": "HtoTT_M500_5pc_Int",
 		"DBSInstance" : "phys03",
-		"xsection": 0.3666
+		"xsection": -0.3666
 	},
 	{
 		"DBSName": "/HToTT-semilep_pseudoscalar-M500-portmanteau_13TeV-madgraph-pythia8/aapopov-MiniAOD-b773ac922eef67f3b5600ed596c9ce54/USER",
@@ -737,7 +783,7 @@
 		},
 		"name": "HtoTT_M500_10pc_Int",
 		"DBSInstance" : "phys03",
-		"xsection": 0.4087
+		"xsection": -0.4087
 	},
 	{
 		"DBSName": "/HToTT-semilep_pseudoscalar-M500-portmanteau_13TeV-madgraph-pythia8/aapopov-MiniAOD-b773ac922eef67f3b5600ed596c9ce54/USER",
@@ -769,7 +815,7 @@
 		},
 		"name": "HtoTT_M500_25pc_Int",
 		"DBSInstance" : "phys03",
-		"xsection": 0.46547
+		"xsection": -0.46547
 	},
 	{
 		"DBSName": "/HToTT-semilep_pseudoscalar-M500-portmanteau_13TeV-madgraph-pythia8/aapopov-MiniAOD-b773ac922eef67f3b5600ed596c9ce54/USER",
@@ -801,7 +847,7 @@
 		},
 		"DBSInstance" : "phys03",
 		"name": "HtoTT_M500_50pc_Int",
-		"xsection": 0.44323
+		"xsection": -0.44323
 	},
 
 
@@ -835,7 +881,7 @@
 		},
 		"DBSInstance" : "phys03",
 		"name": "HtoTT_M600_5pc_Int",
-		"xsection": 0.03008
+		"xsection": -0.03008
 	},
 	{
 		"DBSName": "/HToTT-semilep_pseudoscalar-M600-portmanteau_13TeV-madgraph-pythia8/aapopov-MiniAOD-b773ac922eef67f3b5600ed596c9ce54/USER",
@@ -867,7 +913,7 @@
 		},
 		"DBSInstance" : "phys03",
 		"name": "HtoTT_M600_10pc_Int",
-		"xsection": 0.0701
+		"xsection": -0.0701
 	},
 	{
 		"DBSName": "/HToTT-semilep_pseudoscalar-M600-portmanteau_13TeV-madgraph-pythia8/aapopov-MiniAOD-b773ac922eef67f3b5600ed596c9ce54/USER",
@@ -899,7 +945,7 @@
 		},
 		"DBSInstance" : "phys03",
 		"name": "HtoTT_M600_25pc_Int",
-		"xsection": 0.15424
+		"xsection": -0.15424
 	},
 	{
 		"DBSName": "/HToTT-semilep_pseudoscalar-M600-portmanteau_13TeV-madgraph-pythia8/aapopov-MiniAOD-b773ac922eef67f3b5600ed596c9ce54/USER",
@@ -931,7 +977,7 @@
 		},
 		"DBSInstance" : "phys03",
 		"name": "HtoTT_M600_50pc_Int",
-		"xsection": 0.210
+		"xsection": -0.210
 	},
 
 	{
@@ -964,7 +1010,7 @@
 		},
 		"DBSInstance" : "phys03",
 		"name": "HtoTT_M750_5pc_Int",
-		"xsection": 0.07588
+		"xsection": -0.07588
 	},
 	{
 		"DBSName": "/HToTT-semilep_pseudoscalar-M750-portmanteau_13TeV-madgraph-pythia8/aapopov-MiniAOD-b773ac922eef67f3b5600ed596c9ce54/USER",
@@ -996,7 +1042,7 @@
 		},
 		"DBSInstance" : "phys03",
 		"name": "HtoTT_M750_10pc_Int",
-		"xsection": 0.05138
+		"xsection": -0.05138
 	},
 	{
 		"DBSName": "/HToTT-semilep_pseudoscalar-M750-portmanteau_13TeV-madgraph-pythia8/aapopov-MiniAOD-b773ac922eef67f3b5600ed596c9ce54/USER",
@@ -1028,7 +1074,7 @@
 		},
 		"DBSInstance" : "phys03",
 		"name": "HtoTT_M750_25pc_Int",
-		"xsection": 0.01058
+		"xsection": -0.01058
 	},
 	{
 		"DBSName": "/HToTT-semilep_pseudoscalar-M750-portmanteau_13TeV-madgraph-pythia8/aapopov-MiniAOD-b773ac922eef67f3b5600ed596c9ce54/USER",
@@ -1060,7 +1106,7 @@
 		},
 		"DBSInstance" : "phys03",
 		"name": "HtoTT_M750_50pc_Int",
-		"xsection": 0.0708
+		"xsection": -0.0708
 	},
 
 
