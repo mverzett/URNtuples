@@ -3,7 +3,7 @@ set -o nounset
 set -o errexit
 
 vers='CMSSW_8_0_19' 
-if [ "$CMSSW_VERSION" -eq "$vers" ]
+if [ "$CMSSW_VERSION" -eq "$vers" ]; then
 		echo "URNtuple installation is CMSSW-version dependent!"
 		echo "This recipe was made for $vers, either update the recipe (and push to a new branch), use the appropriate branch for the release, or use $vers!"
 		exit 42
