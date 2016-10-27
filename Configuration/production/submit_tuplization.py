@@ -93,12 +93,12 @@ jobs = []
 #JEC external files
 externals = []
 if args.externals:
-	paths = args.externals.split()
+	set_trace()
+	paths = [os.path.join(os.environ['CMSSW_BASE'],'src/URNtuples/Configuration/production/',i) for i in args.externals.split()]
 	for i in paths:
-		externals.extend(glob(i))
+		externals.extend([os.path.realpath(j) for j in glob(i)])
 	if not len(externals):
 		raise RuntimeError('You provided external files but I could not find any!')
-externals = [os.path.join(os.environ['CMSSW_BASE'],'src',i) for i in externals]
 
 for sample in to_submit:
    opts = {}
@@ -127,8 +127,9 @@ for sample in to_submit:
 if args.crab == 3:
    crab_cfgs = [job.save_as_crab(args.jobid, True) for job in jobs]
    print 'To submit run:'
+   print 'source /cvmfs/cms.cern.ch/crab3/crab_standalone.sh'
    print 'cd %s' % args.jobid
-   print '\n'.join('crab3 submit -c %s' % cfg for cfg in crab_cfgs)
+   print '\n'.join('crab submit -c %s' % cfg for cfg in crab_cfgs)
 elif args.crab == 2:
    crab_cfgs = [job.save_as_crab2(args.jobid) for job in jobs]
    print 'To submit run:'
