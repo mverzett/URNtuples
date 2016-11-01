@@ -63,7 +63,7 @@ private:
   virtual void analyze(const edm::Event&, const edm::EventSetup&) override;
   virtual void endJob() override;
 
-  virtual void endRun(edm::Run const&, edm::EventSetup const&) override;
+  virtual void endRun(edm::Run const&, edm::EventSetup const&) override {}
   virtual void endLuminosityBlock(edm::LuminosityBlock const&, edm::EventSetup const&) override;
 
   // ----------member data ---------------------------
@@ -126,21 +126,6 @@ void MetaNtuplizer::beginJob()
   meta_tree_->Branch("lumi", &lumi_);
   meta_tree_->Branch("processed", &processed_);
   meta_tree_->Branch("processedWeighted", &processedWeighted_);
-}
- 
-void MetaNtuplizer::endRun(edm::Run const& run, edm::EventSetup const&) {
-	if(!hasLhe_ || to_json_.find("LHEHeader") != to_json_.end()) return;
-	edm::Handle<LHERunInfoProduct> lheinfo;
-	run.getByToken(header_token_, lheinfo);
-	
-	std::stringstream header;
-	for(auto iter=lheinfo->headers_begin(); iter!=lheinfo->headers_end(); ++iter){
-		header << iter->tag();
-		std::vector<std::string> lines = iter->lines();
-		for(auto& line : iter->lines())
-			header << line;
-	}
-	to_json_["LHEHeader"] = header.str();
 }
 
 void MetaNtuplizer::analyze(const edm::Event& iEvent, const edm::EventSetup&)
