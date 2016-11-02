@@ -172,6 +172,29 @@
 		"xsection": 70.70
 	},
 	{
+		"DBSName": "/ST_t-channel_4f_mtop1755_leptonDecays_13TeV-amcatnlo-pythia8/RunIISpring16MiniAODv2-premix_withHLT_80X_mcRun2_asymptotic_v14_ext1-v1/MINIAODSIM",
+		"options": {
+			"isMC": true,
+			"runJEC": true,
+			"skims": "muPlus3Jets,elPlus3Jets",
+			"globalTag": "80X_mcRun2_asymptotic_2016_miniAODv2_v1"
+		},
+		"name": "singlet_tmassUp_tchannel",
+		"xsection": 70.70
+	},
+	{
+		"DBSName": "/ST_t-channel_4f_mtop1695_leptonDecays_13TeV-amcatnlo-pythia8/RunIISpring16MiniAODv2-premix_withHLT_80X_mcRun2_asymptotic_v14_ext1-v1/MINIAODSIM",
+		"options": {
+			"isMC": true,
+			"runJEC": true,
+			"skims": "muPlus3Jets,elPlus3Jets",
+			"globalTag": "80X_mcRun2_asymptotic_2016_miniAODv2_v1"
+		},
+		"name": "singlet_tmassDown_tchannel",
+		"xsection": 70.70
+	},
+
+	{
 		"DBSName": "/ST_tW_top_5f_NoFullyHadronicDecays_13TeV-powheg_TuneCUETP8M1/RunIISpring16MiniAODv2-PUSpring16_80X_mcRun2_asymptotic_2016_miniAODv2_v0-v1/MINIAODSIM",
 		"options": {
 			"isMC": true,
@@ -236,6 +259,62 @@
 		"name": "WJets",
 		"xsection_old": 60290,
 				"xsection" : 61526.7
+	},
+	{
+		"DBSName": "/W1JetsToLNu_TuneCUETP8M1_13TeV-madgraphMLM-pythia8/RunIISpring16MiniAODv2-PUSpring16_80X_mcRun2_asymptotic_2016_miniAODv2_v0-v1/MINIAODSIM",
+		"options": {
+			"reHLT" : false,
+			"isMC": true,
+			"runJEC": true,
+			"computeWeighted": true,
+			"skims": "muPlus3Jets,elPlus3Jets",
+			"globalTag": "80X_mcRun2_asymptotic_2016_miniAODv2_v1"
+		},
+		"name": "W1Jets",
+		"xsection_old": 0,
+		"xsection" : 0.0
+	},
+	{
+		"DBSName": "/W2JetsToLNu_TuneCUETP8M1_13TeV-madgraphMLM-pythia8/RunIISpring16MiniAODv2-PUSpring16_80X_mcRun2_asymptotic_2016_miniAODv2_v0-v1/MINIAODSIM",
+		"options": {
+			"reHLT" : false,
+			"isMC": true,
+			"runJEC": true,
+			"computeWeighted": true,
+			"skims": "muPlus3Jets,elPlus3Jets",
+			"globalTag": "80X_mcRun2_asymptotic_2016_miniAODv2_v1"
+		},
+		"name": "W2Jets",
+		"xsection_old": 0,
+		"xsection" : 0.0
+	},
+	{
+		"DBSName": "/W3JetsToLNu_TuneCUETP8M1_13TeV-madgraphMLM-pythia8/RunIISpring16MiniAODv2-PUSpring16_80X_mcRun2_asymptotic_2016_miniAODv2_v0-v1/MINIAODSIM",
+		"options": {
+			"reHLT" : false,
+			"isMC": true,
+			"runJEC": true,
+			"computeWeighted": true,
+			"skims": "muPlus3Jets,elPlus3Jets",
+			"globalTag": "80X_mcRun2_asymptotic_2016_miniAODv2_v1"
+		},
+		"name": "W3Jets",
+		"xsection_old": 0,
+		"xsection" : 0.0
+	},
+	{
+		"DBSName": "/W4JetsToLNu_TuneCUETP8M1_13TeV-madgraphMLM-pythia8/RunIISpring16MiniAODv2-PUSpring16_80X_mcRun2_asymptotic_2016_miniAODv2_v0-v1/MINIAODSIM",
+		"options": {
+			"reHLT" : false,
+			"isMC": true,
+			"runJEC": true,
+			"computeWeighted": true,
+			"skims": "muPlus3Jets,elPlus3Jets",
+			"globalTag": "80X_mcRun2_asymptotic_2016_miniAODv2_v1"
+		},
+		"name": "W4Jets",
+		"xsection_old": 0,
+		"xsection" : 0.0
 	},
 
 
