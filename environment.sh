@@ -14,5 +14,8 @@ alias crab3='/cvmfs/cms.cern.ch/crab3/crab-env-bootstrap.sh'
 export CRAB3_LOCATION=/cvmfs/cms.cern.ch/crab3/crab.sh
 export CRAB2_LOCATION=/cvmfs/cms.cern.ch/crab/crab.sh
 
+# Don't require a scram build to get updated scripts
+export PATH=$URN/Utilities/scripts:$PATH
+
 #re-run cmsenv, crab tends to screw up many things
 eval `scramv1 runtime -sh`
