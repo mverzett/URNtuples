@@ -37,6 +37,7 @@ process.source = cms.Source(
       #'/store/relval/CMSSW_7_0_6/RelValTTbarLepton_13/MINIAODSIM/PLS170_V6AN1-v1/00000/CA50900E-43FA-E311-B663-0025905A48EC.root'
       options.inputFiles
       ),
+		inputCommands = cms.untracked.vstring("keep *", "drop LHERunInfoProduct_*_*_*"),
 )
 if options.pick:
 	process.source.eventsToProcess = cms.untracked.VEventRange(options.pick)
