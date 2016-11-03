@@ -93,7 +93,6 @@ jobs = []
 #JEC external files
 externals = []
 if args.externals:
-	set_trace()
 	paths = [os.path.join(os.environ['CMSSW_BASE'],'src/URNtuples/Configuration/production/',i) for i in args.externals.split()]
 	for i in paths:
 		externals.extend([os.path.realpath(j) for j in glob(i)])
