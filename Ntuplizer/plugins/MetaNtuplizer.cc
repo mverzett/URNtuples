@@ -44,7 +44,6 @@
 #include <sstream> 
 
 #include "SimDataFormats/GeneratorProducts/interface/LHEEventProduct.h"
-#include "SimDataFormats/GeneratorProducts/interface/LHERunInfoProduct.h"
 
 //
 // class declaration
@@ -69,7 +68,6 @@ private:
   // ----------member data ---------------------------
   edm::InputTag weights_src_;
   edm::EDGetTokenT< LHEEventProduct > weights_srcToken_;
-  edm::EDGetTokenT< LHERunInfoProduct > header_token_;
 
   TTree *meta_tree_;
   std::map<std::string, std::string> to_json_;
@@ -96,7 +94,6 @@ private:
 MetaNtuplizer::MetaNtuplizer(const edm::ParameterSet& iConfig):
   weights_src_(iConfig.getParameter<edm::InputTag>("weightsSrc") ),
   weights_srcToken_(consumes<LHEEventProduct>(weights_src_)),	
-	header_token_(consumes<LHERunInfoProduct,edm::InRun>(weights_src_)),
   string_dumped_(false),
   isMC_(iConfig.getParameter<bool>("isMC")),
 	hasLhe_(iConfig.getParameter<bool>("hasLHE"))
