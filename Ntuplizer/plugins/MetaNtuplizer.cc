@@ -45,6 +45,7 @@
 
 #include "SimDataFormats/GeneratorProducts/interface/LHEEventProduct.h"
 
+using namespace std;
 //
 // class declaration
 //
@@ -78,6 +79,7 @@ private:
   unsigned int run_;
   unsigned long long processed_ = 0;
   long long processedWeighted_ = 0; 
+	vector<double> sumw_;
 };
 
 //
@@ -96,7 +98,8 @@ MetaNtuplizer::MetaNtuplizer(const edm::ParameterSet& iConfig):
   weights_srcToken_(consumes<LHEEventProduct>(weights_src_)),	
   string_dumped_(false),
   isMC_(iConfig.getParameter<bool>("isMC")),
-	hasLhe_(iConfig.getParameter<bool>("hasLHE"))
+	hasLhe_(iConfig.getParameter<bool>("hasLHE")),
+	sumw_()
 {
   useWeighted_ = true;
   triedWeighted_ = false;
@@ -123,6 +126,7 @@ void MetaNtuplizer::beginJob()
   meta_tree_->Branch("lumi", &lumi_);
   meta_tree_->Branch("processed", &processed_);
   meta_tree_->Branch("processedWeighted", &processedWeighted_);
+  meta_tree_->Branch("sum_weigts", &sumw_);
 }
 
 void MetaNtuplizer::analyze(const edm::Event& iEvent, const edm::EventSetup&)
@@ -138,7 +142,23 @@ void MetaNtuplizer::analyze(const edm::Event& iEvent, const edm::EventSetup&)
 		}
 		if(lheinfo->weights().size() == 0) 
 			throw cms::Exception("RuntimeError") << "The LHEInfo I got works but has not weights!" << std::endl;
+
+		size_t nws = lheinfo->weights().size();
+		if(!sumw_.size()) {
+			sumw_.reserve(nws);
+			for(size_t i=0; i<nws; ++i) {
+				sumw_.push_back(0.);
+			}
+		} else {
+			if(nws != sumw_.size())
+				throw cms::Exception("RuntimeError") << "I set up for " << sumw_.size() << 
+					" LHE weights, but this event has " << nws << "!" << std::endl;
+		}
+
 		weight = lheinfo->weights()[0].wgt;
+		for(size_t i=0; i<nws; ++i) {
+			sumw_[i] += lheinfo->weights()[i].wgt;
+		}
 		//std::cout << weight << std::endl;
 	}
 	processedWeighted_ += (weight < 0. ? -1. : 1.);
@@ -215,6 +235,7 @@ MetaNtuplizer::endLuminosityBlock(edm::LuminosityBlock const& block, edm::EventS
   meta_tree_->Fill();
   processed_ = 0;
   processedWeighted_ = 0;
+	for(size_t i=0; i<sumw_.size(); ++i) sumw_[i] = 0;
   /*if(!string_dumped_)
     {
       string_dumped_ = true;
